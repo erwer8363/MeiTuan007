@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { debounce } from '@/api/utils';
+import { debounce } from '@/utils';
 import { NavBar } from 'antd-mobile'
 
 const SearchBoxWrapper = styled.div`
