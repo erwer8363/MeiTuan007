@@ -1,0 +1,282 @@
+.enterLoading {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.wrapper {
+  width: 100%;
+  padding-top: 0.045rem;
+  padding-bottom: 3rem;
+}
+
+// 商家卡片
+.poilistItem {
+  background-color: #fff;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  border: 0.045rem solid #f2f1f0;
+  border-radius: 0.27rem;
+  overflow: visible;
+  margin: 0.5rem;
+}
+
+.poilistItemIcon {
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 0.08rem;
+  width: 5.05rem;
+  height: 5.05rem;
+  border: 0.045rem solid #f2f1f0;
+  box-sizing: border-box;
+  border-radius: 0.27rem;
+}
+
+.poilistItemIconPic {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.4rem;
+}
+
+.poilistItemIconPoitypepic {
+  position: absolute;
+  top: -0.09rem;
+  right: -0.09rem;
+  height: 0.81rem;
+
+  .poitypePic {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.poilistItemInfo {
+  overflow: hidden;
+  flex: 1;
+}
+
+// 第 1 行：店名
+.poilistItemInfo1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 1.15rem;
+  padding-bottom: 0.15rem;
+}
+
+.poilistItemInfo1name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #222426;
+  margin-right: 8px;
+  line-height: 1rem;
+}
+
+// 第 2 行：评分 / 月售 / 人均
+.poilistItemInfo2 {
+  padding: 0.1rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1rem;
+  box-sizing: border-box;
+}
+
+.poilistItemInfo2left {
+  flex: 1;
+  margin-right: 0.3rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .poiInfoTxt {
+    font-size: 0.55rem;
+    color: #858687;
+    line-height: 0.8rem;
+    margin-right: 0.3rem;
+    white-space: nowrap;
+
+    &.score {
+      color: #ff8000;
+      font-size: 0.6rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.poilistItemInfo2right {
+  flex-shrink: 0;
+  overflow: hidden;
+  height: 0.8rem;
+}
+
+// 第 3 行：起送 / 配送费 / 时间 / 距离
+.poilistItemInfo3 {
+  padding: 0.05rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.2rem;
+  box-sizing: border-box;
+}
+
+.poilistItemInfo3left {
+  flex: 1;
+  margin-right: 0.3rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .poiInfoTxt {
+    font-size: 0.55rem;
+    color: #858687;
+    line-height: 0.8rem;
+    margin-right: 0.3rem;
+    white-space: nowrap;
+
+    &.noMarginRight {
+      margin-right: 0.09rem;
+    }
+  }
+}
+
+.poilistItemInfo3right {
+  flex-shrink: 0;
+  overflow: hidden;
+  height: 0.8rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .poiInfoTxt {
+    font-size: 0.55rem;
+    color: #858687;
+    line-height: 0.8rem;
+    margin-left: 0.3rem;
+    white-space: nowrap;
+  }
+}
+
+// 第 4 行：榜单 / 收藏标签
+.poilistItemInfo4 {
+  padding: 0.1rem 0;
+  height: 1.15rem;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.poilistItemInfo4item {
+  height: 0.8rem;
+  margin: 0 0.18rem 0.27rem 0;
+  overflow: hidden;
+  flex: none;
+  max-width: 100%;
+  border-radius: 0.18rem;
+}
+
+.poilistItemInfo4itemtxt {
+  max-width: 100%;
+  height: 0.8rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.09rem;
+
+  .info4ItemTxtlefticon {
+    height: 0.8rem;
+  }
+
+  .info4ItemTxt {
+    max-width: 100%;
+    overflow: hidden;
+    flex: none;
+    padding: 0 0.09rem;
+    line-height: 0.8rem;
+    font-size: 0.55rem;
+  }
+}
+
+// 第 5 行：优惠标签
+.poilistItemInfo5 {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  position: relative;
+  height: 0.95rem;
+  overflow: hidden;
+
+  &.moreIconNeed {
+    padding-right: 0.68rem;
+  }
+}
+
+.dCmmLabelCompWrap {
+  letter-spacing: 0;
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  .dSublabelContainer {
+    height: 0.73rem;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    &.dMultiLine {
+      height: auto;
+    }
+
+    .dSublabelBlock {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .dSublabel {
+      flex: 0 0 auto;
+      max-width: 100%;
+      font-size: 0.46rem;
+      color: #fb4e44;
+      border: 0.045rem solid transparent;
+      border-radius: 0.09rem;
+      margin-right: 0.27rem;
+      margin-bottom: 0.175rem;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      height: 0.73rem;
+      overflow: hidden;
+
+      .dLb {
+        display: inline-block;
+        color: #fb4e44;
+        padding: 0 0.175rem;
+        height: 0.73rem;
+        line-height: 0.73rem;
+        position: relative;
+        vertical-align: middle;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,6 @@
 import { http } from './http'
 import { resolveUrl } from './endpoints'
 
-export const getCitiesRequest = () => http.get(resolveUrl('cities'))
 export const getBannersRequest = () => http.get(resolveUrl('banners'))
 export const getRestaurantsRequest = () => http.get(resolveUrl('restaurants'))
 export const getHomeDetailOrderRequest = () => http.get(resolveUrl('goods'))

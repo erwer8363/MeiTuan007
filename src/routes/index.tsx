@@ -2,17 +2,17 @@
 import { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router'
 import RequireAuth from '@/components/RequireAuth'
-import Home from '@/pages/Home'
-const Order = lazy(() => import('@/pages/Order'))
-const Mine = lazy(() => import('@/pages/Mine'))
-const Cities = lazy(() => import('@/pages/Cities'))
-const Search = lazy(() => import('@/pages/Search'))
-const Login = lazy(() => import('@/pages/Login'))
-const Register = lazy(() => import('@/pages/Register'))
-const HomeDetail = lazy(() => import('@/pages/HomeDetail'))
-const HomeOrder = lazy(() => import('@/pages/HomeDetail/HomeOrder'))
-const HomeComment = lazy(() => import('@/pages/HomeDetail/HomeComment'))
-const HomeBusiness = lazy(() => import('@/pages/HomeDetail/HomeBusiness'))
+import Home from '@/pages/home'
+const Order = lazy(() => import('@/pages/order'))
+const Mine = lazy(() => import('@/pages/mine'))
+const Cities = lazy(() => import('@/pages/cities'))
+const Search = lazy(() => import('@/pages/search'))
+const Login = lazy(() => import('@/pages/login'))
+const Register = lazy(() => import('@/pages/register'))
+const HomeDetail = lazy(() => import('@/pages/homeDetail'))
+const HomeOrder = lazy(() => import('@/pages/homeDetail/HomeOrder'))
+const HomeComment = lazy(() => import('@/pages/homeDetail/HomeComment'))
+const HomeBusiness = lazy(() => import('@/pages/homeDetail/HomeBusiness'))
 
 // lazy 动态加载的组件必须配合 Suspense 使用（见 App.tsx）
 const RoutesConfig = () => {

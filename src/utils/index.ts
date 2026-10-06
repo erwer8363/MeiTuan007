@@ -120,8 +120,8 @@ export function throttle(fn, delay) {
 export const isPathPartlyExisted = (path) => {
    const arr = ['/cities', '/homedetail', '/search', '/login', '/register'];
    let pathRes = path.split('/')
-   if (pathRes[1] && arr.indexOf('/' + pathRes[1]) != -1) return true;
-   return false
+   return !!(pathRes[1] && arr.indexOf('/' + pathRes[1]) != -1);
+
 
 
 

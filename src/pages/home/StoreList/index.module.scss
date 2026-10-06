@@ -1,0 +1,163 @@
+.wrapper {
+  height: 3.5rem;
+  color: #333;
+
+  .kkFilterWrapper {
+    padding-top: 0.45rem;
+
+    .comFilter .filterWrapper {
+      padding: 0 0.12rem;
+    }
+
+    // 第一行：综合排序 / 全部筛选
+    .mFilterOut {
+      height: 1.27rem;
+      overflow: hidden;
+      padding: 0 0.31rem 0 0.36rem;
+
+      .outWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .outItemLeft {
+        flex: none;
+        width: 25%;
+        overflow: hidden;
+        margin-left: 0.5rem;
+      }
+
+      .outItemCenter {
+        flex: none;
+        width: 50%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+      }
+
+      .outItemRight {
+        flex: none;
+        overflow: hidden;
+        width: 25%;
+        margin-left: -1rem;
+
+        .outItemInfo {
+          flex-direction: row-reverse;
+        }
+      }
+
+      .outItemInfo {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+
+      .outItemInfoTitarrow {
+        margin-left: 0.18rem;
+        flex: none;
+        height: 0.27rem;
+        width: 0.31rem;
+        transition: all 0.2s;
+      }
+
+      .outItemInfoTit {
+        flex-shrink: 1;
+        font-size: 0.54rem;
+        color: #222426;
+        text-align: center;
+        line-height: 1.27rem;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    // 第二行：快捷筛选
+    .mFilterQuick {
+      height: 37px;
+      overflow: hidden;
+      padding: 0.18rem 0 0.27rem;
+      box-sizing: border-box;
+      position: relative;
+
+      .quickWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        overflow-y: hidden;
+      }
+
+      .quickItem {
+        height: 1.4rem;
+      }
+
+      .quickItemHidebar {
+        width: 3.27rem;
+        height: 1.1rem;
+        border-radius: 0.27rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        position: relative;
+      }
+
+      .quickItemTit {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+        padding: 0 0.18rem;
+        box-sizing: border-box;
+      }
+
+      .quickItemTittxt {
+        flex-shrink: 1;
+        font-size: 0.54rem;
+        color: #575859;
+        line-height: 27px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .backTop {
+    width: 2.27rem;
+    height: 2.27rem;
+    position: fixed;
+    bottom: 2.72rem;
+    right: 0.45rem;
+    border-radius: 50%;
+    line-height: 2.27rem;
+    text-align: center;
+    font-size: 1.2rem;
+    z-index: 999;
+    background-color: #eee;
+  }
+
+  // TODO(阶段 6)：fixed 由 utils.isFixed 和本组件的 classList.add/remove 在运行时切换，
+  // 必须保持全局类名；改成 state / Hook 驱动后再换成 CSS Modules 类。
+  :global(.fixed) {
+    position: fixed;
+    width: 100%;
+    top: 4rem;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+
+    .quickItemTittxt {
+      background-color: #f5f5f6;
+      width: 3.27rem;
+      height: 1.33rem;
+      border-radius: 0.27rem;
+    }
+  }
+}

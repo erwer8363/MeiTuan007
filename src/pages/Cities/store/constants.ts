@@ -1,1 +1,0 @@
-export const CHANGE_CITIES_LIST = 'CHANGE_CITIES_LIST'
