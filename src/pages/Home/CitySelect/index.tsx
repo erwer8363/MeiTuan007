@@ -1,6 +1,6 @@
-import React, { useEffect,memo } from 'react'
+import { useEffect, memo } from 'react'
 import { Wrapper } from './style'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 // 子组件一般不做数据请求 由父组件统一并传参过来
  function CitySelect(props) {

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,memo}from 'react'
+import { useState, useEffect, memo } from 'react'
 import { Wrapper } from './style'
 import { connect } from 'react-redux'
 import { getBusinessList } from './store/actionCreators'

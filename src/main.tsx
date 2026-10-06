@@ -1,8 +1,7 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { initRem } from '@/utils/rem'
 import App from './App'
-import { HashRouter, BrowserRouter } from 'react-router-dom'
+import { HashRouter, BrowserRouter } from 'react-router'
 // 引入初始化css样式文件
 import '@/styles/reset.css'
 // 引入字体图标

@@ -23,7 +23,7 @@ const storageConfig = {
     storage: storageSession, // 缓存机制
     // reducer 里不持久化的数据,除此外均为持久化数据
 };
-import thunk from 'redux-thunk'
+import { thunk } from "redux-thunk"
 import reducer from './reducer'
 // 组件 中间件redux-thunk    数据
 // Redux的中间件，处于Action和Reducer之间，将中间某个过程拦截一下，进行一些处理再继续正常执行，这就是中间件的功能。

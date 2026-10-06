@@ -81,12 +81,22 @@
 - 浏览器验证：登录重定向、`/home` 渲染正常、无控制台报错；餐厅列表为空，原因是 fastmock 接口（见风险表）。
 
 ### 阶段 2：React 19 + Router 7（1.5h）
-- [ ] `react` / `react-dom` / `@types/react*` 升到 19；清理 `React.FC` 与 `import React`（新 JSX transform 不需要）
-- [ ] `forwardRef`（`Scroll` 组件）改为 `ref` 作为普通 prop
-- [ ] 去掉 `prop-types`，改 TS interface（符合个人规范：组件必须有 Props 类型）
-- [ ] 路由迁到 `react-router` v7；`main.tsx` 的 `Provider` / `PersistGate` 暂时保留（Jotai 迁完再删）
-- [ ] 重写鉴权：`SafeRouter` → `RequireAuth` 布局路由（`<Navigate replace>` + `<Outlet/>`），删掉 `App` 里 `useEffect` 重定向
+- [x] `react` / `react-dom` / `@types/react*` 升到 19；清理 `React.FC` 与 `import React`（新 JSX transform 不需要）
+- [x] `forwardRef`（`Scroll` 组件）改为 `ref` 作为普通 prop
+- [x] 去掉 `prop-types`，改 TS interface（符合个人规范：组件必须有 Props 类型）
+- [x] 路由迁到 `react-router`（实际装到 v8.4，API 与 v7 一致）；`main.tsx` 的 `Provider` / `PersistGate` 暂时保留（Jotai 迁完再删）
+- [x] 重写鉴权：`SafeRouter` → `RequireAuth` 布局路由（`<Navigate replace>` + `<Outlet/>`），删掉 `App` 里 `useEffect` 重定向
 - 学习点：React 19 变更清单（`use`、Actions、ref prop、Context 作为 Provider）
+
+**阶段 2 实际结果（2026-10-06）**
+- 版本：react / react-dom 19.3、react-router 8.4、antd-mobile 5.43（旧版 5.18 不支持 React 19，必须升）、styled-components 6.5、react-redux 9、redux 5、redux-thunk 3（`import { thunk }` 改为具名导出）。已移除 `react-router-dom`、`prop-types`、`@reduxjs/toolkit`（未使用）。
+- 所有 `import React` / `React.memo` 清理为具名导入；`.js` 后缀导入清理。
+- `Scroll`：`forwardRef` → `ref` prop，补 `ScrollHandle` / Props 类型；**`defaultProps` 在 React 19 对函数组件已失效**，改为参数默认值；卸载时补 `scroll.destroy()`（旧版有泄漏）。
+- **踩坑**：`react-transition-group` 内部用了 React 19 已删除的 `findDOMNode`，Search 页整页白屏；给 `CSSTransition` 加 `nodeRef` 修复。
+- 鉴权：`SafeRouter` 删除，新增 `RequireAuth` 布局路由；`App` 里的 `useEffect` 重定向删除；`/homedetail/:id` 增加 index → `order` 重定向，子路由改相对路径。
+- 浏览器验证：未登录访问 `/mine` 跳 `/login`；登录态下 `/`→`/home`、`/homedetail/1`→`/order`、`/search`、`/mine` 渲染正常；仅剩 fastmock 404 的 AxiosError（Cities 页因此为空）。
+- 构建：主 chunk 437 KiB / gzip 127 KiB（比阶段 1 大，因 antd-mobile 升级；阶段 4/5 删除 styled/redux 后再对比）。
+- `npm run typecheck` 当前 84 个错误（阶段 3 处理）。
 
 ### 阶段 3：TypeScript 类型补全（2h）
 - [ ] 为 JSON/接口数据建模，放 `src/types/`：`Restaurant`、`Banner`、`City`、`Goods`/`GoodsCategory`/`Spu`、`Rating`、`Seller`、`UserLoginPayload`

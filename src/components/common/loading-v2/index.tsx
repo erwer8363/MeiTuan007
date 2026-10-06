@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react'
 import styled, { keyframes } from 'styled-components';
 import style from '@/assets/global-style'
 
@@ -55,4 +55,4 @@ function LoadingV2() {
   );
 }
 
-export default React.memo(LoadingV2);
+export default memo(LoadingV2);

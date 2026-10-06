@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { Wrapper, EnterLoading } from './style'
 import { connect } from 'react-redux'
 import { Tabs, Badge } from 'antd-mobile'

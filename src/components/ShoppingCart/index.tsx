@@ -1,5 +1,5 @@
-import React, { useState, useEffect,memo } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, memo } from 'react'
+import { Link } from 'react-router'
 import { Wrapper } from './style'
 import classnames from 'classnames'
 

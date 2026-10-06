@@ -1,4 +1,4 @@
-import * as actionTypes from './constants.js'
+import * as actionTypes from './constants'
 
 const defaulState = {
     GoodsList: [],

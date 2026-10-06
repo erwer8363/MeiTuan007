@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { memo } from 'react'
+import { Link, useLocation } from 'react-router'
 import { FooterWrapper } from './style'
 import classnames from 'classnames'
 import { isPathPartlyExisted } from '@/utils'

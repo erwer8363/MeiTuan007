@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef, memo } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState, useRef, memo } from 'react'
+import { Link } from 'react-router'
 import { Wrapper, EnterLoading } from './style'
 // 图片延迟加载
 import Loading from '@/components/common/loading'

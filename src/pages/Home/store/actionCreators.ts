@@ -1,5 +1,5 @@
 import * as actionTypes from './constants'
-import { getBannersRequest, getRestaurantsRequest } from '@/api/request.js'
+import { getBannersRequest, getRestaurantsRequest } from '@/api/request'
 
 export const changeBannersList = (data) => ({
     type: actionTypes.GET_BANNERS_LIST,

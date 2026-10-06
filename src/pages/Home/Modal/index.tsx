@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { Wrapper } from './style'
 import { useState, useEffect } from 'react'
 function Modal(props) {

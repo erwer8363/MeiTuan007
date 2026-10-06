@@ -1,5 +1,5 @@
 import * as actionTypes from './constants'
-import { getHomeDetailCommentRequest } from '@/api/request.js'
+import { getHomeDetailCommentRequest } from '@/api/request'
 
 export const changeCommentsList = (data) => ({
     type: actionTypes.GET_COMMENTS_LIST,

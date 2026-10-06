@@ -1,6 +1,6 @@
-import React, { useState, useEffect, memo, useMemo } from 'react';
+import { useState, useEffect, useRef, memo, useMemo } from 'react'
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 //  useRef  DOM 相关
 //  useCallback 性能优化 
 import { changeEnterLoading } from './store/actionCreators'
@@ -23,6 +23,8 @@ const Search = (props) => {
     // 搜索内容 redux 解决共享状态问题 
     const [query, setQuery] = useState('周杰伦')
     const [show, setShow] = useState(true);
+    // React 19 移除了 findDOMNode，CSSTransition 必须通过 nodeRef 指定动画节点
+    const nodeRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
 
@@ -46,6 +48,7 @@ const Search = (props) => {
 
         // 当dom ready 组件挂载上去， 应用css transiiton效果 
         <CSSTransition
+            nodeRef={nodeRef}
             // 如果this.state.show从false变为true，则动画入场，反之out
             in={show}
             // timeout={1000} 动画执行1秒
@@ -61,7 +64,7 @@ const Search = (props) => {
             }}
         >
 
-            <Container >
+            <Container ref={nodeRef}>
                 {/* 搜索框 */}
                 <div className="search_box_wrapper">
                     <SearchBox

@@ -1,7 +1,7 @@
-import React, { memo, useEffect, } from 'react'
+import { memo, useEffect } from 'react'
 import { Wrapper } from './style'
 // import { NavBar } from 'antd-mobile'
-import { useNavigate, Outlet, useParams } from 'react-router-dom'
+import { useNavigate, Outlet, useParams } from 'react-router'
 // 快捷方式 @ /src   工程化 alias 
 import HomeDetailNav from '@/components/HomeDetailNav'
 

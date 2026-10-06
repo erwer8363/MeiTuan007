@@ -1,6 +1,5 @@
-import React from 'react'
-import {pageTitle} from '@/config/index.js'
-import { useLocation } from 'react-router-dom'
+import {pageTitle} from '@/config'
+import { useLocation } from 'react-router'
 
 export default function Header() {
   const {pathname}= useLocation()

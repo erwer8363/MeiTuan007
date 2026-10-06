@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Wrapper } from './style'
 import axios from 'axios'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import loginPic from '@/assets/images/登录.png'
 import { setCookie } from '../../utils/storage'
 

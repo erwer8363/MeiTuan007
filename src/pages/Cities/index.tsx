@@ -1,6 +1,6 @@
-import React, { useState, useEffect,memo } from 'react';
+import { useState, useEffect, memo } from 'react'
 import { CityWrapper } from './style'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import {getCitiesList } from './store/actionCreators'
 

@@ -1,5 +1,5 @@
 import * as actionTypes  from './constants'
-import { getHomeDetailOrderRequest } from '@/api/request.js'
+import { getHomeDetailOrderRequest } from '@/api/request'
 
 
 export const changeGoodsList = (data) => ({

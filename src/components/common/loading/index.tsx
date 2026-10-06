@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react'
 import styled, { keyframes } from 'styled-components';
 import style from '@/assets/global-style';
 
@@ -36,4 +36,4 @@ function Loading()  {
   );
 }
  
-export default React.memo(Loading);
+export default memo(Loading);

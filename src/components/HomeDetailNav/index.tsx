@@ -1,9 +1,12 @@
-import React, { useEffect, memo } from 'react'
-import propTyes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+import { useEffect, memo } from 'react'
+import { NavLink } from 'react-router'
 import { Wrapper } from './style'
 
-function HomeDetailNav({ id }) {
+interface HomeDetailNavProps {
+    id: string
+}
+
+function HomeDetailNav({ id }: HomeDetailNavProps) {
 
     // 页面二级路由的导航准备
     let homeNavs = [
@@ -16,10 +19,9 @@ function HomeDetailNav({ id }) {
             <div className="navbar">
                 <div className="nav-box ">
                     {
-                        homeNavs.map((item, index) => {
+                        homeNavs.map((item) => {
                             return (
                                 <NavLink
-                                    index={index}
                                     to={`/homedetail/${id}${item.path}`}
                                     key={item.id}
                                     className="nav-item "
@@ -46,7 +48,4 @@ function HomeDetailNav({ id }) {
     )
 }
 
-HomeDetailNav.propTyes = {
-    id: propTyes.string.isRequired
-}
 export default memo(HomeDetailNav)

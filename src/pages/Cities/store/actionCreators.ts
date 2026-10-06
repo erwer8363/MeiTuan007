@@ -1,5 +1,5 @@
 import * as actionTypes  from './constants'
-import {getCitiesRequest } from '@/api/request.js'
+import {getCitiesRequest } from '@/api/request'
 
 export const changeCitiesList = (data) => ({
     type:actionTypes.CHANGE_CITIES_LIST,

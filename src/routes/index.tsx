@@ -1,7 +1,7 @@
 // 独立配置文件 
 import { lazy } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import SafeRouter from '@/components/SafeRouter'
+import { Routes, Route, Navigate } from 'react-router'
+import RequireAuth from '@/components/RequireAuth'
 import Home from '@/pages/Home'
 const Order = lazy(() => import('@/pages/Order'))
 const Mine = lazy(() => import('@/pages/Mine'))
@@ -14,27 +14,31 @@ const HomeOrder = lazy(() => import('@/pages/HomeDetail/HomeOrder'))
 const HomeComment = lazy(() => import('@/pages/HomeDetail/HomeComment'))
 const HomeBusiness = lazy(() => import('@/pages/HomeDetail/HomeBusiness'))
 
-// Routes 不能和react-router-dom 一样
-// 使用lazy动态加载组件时候报错如下
-// 使用了Suspense 组件 配合lazy使用成功解决
+// lazy 动态加载的组件必须配合 Suspense 使用（见 App.tsx）
 const RoutesConfig = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/mine" element={<Mine />} />
-            <Route path="/cities" element={<Cities />} />
-            <Route path="/search" element={<Search />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path="/homedetail/:id" element={<HomeDetail />}>
-                <Route path='/homedetail/:id/order' index element={<HomeOrder />} />
-                <Route path='/homedetail/:id/comment' element={<HomeComment />} />
-                <Route path='/homedetail/:id/business' element={<HomeBusiness />} />
+            {/* 公开路由 */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* 需要登录的路由 */}
+            <Route element={<RequireAuth />}>
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/mine" element={<Mine />} />
+                <Route path="/cities" element={<Cities />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/homedetail/:id" element={<HomeDetail />}>
+                    <Route index element={<Navigate to="order" replace />} />
+                    <Route path="order" element={<HomeOrder />} />
+                    <Route path="comment" element={<HomeComment />} />
+                    <Route path="business" element={<HomeBusiness />} />
+                </Route>
+                <Route path="*" element={<Mine />} />
             </Route>
-            <Route path='*' element={<Mine />} />
             {/* 默认路由
                 定义：在嵌套路由中，如果 URL 仅匹配了父级 URL，则Outlet中会显示带有index属性的子路由。可以使用在路由的任何层级
                    <Routes>
