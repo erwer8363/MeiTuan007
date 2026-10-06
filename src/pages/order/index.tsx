@@ -1,6 +1,3 @@
-
 export default function Order() {
-  return (
-    <div>Order</div>
-  )
+  return <div>Order</div>
 }

@@ -8,7 +8,6 @@ function Footer(props) {
   const { pathname } = useLocation()
 
   if (isPathPartlyExisted(pathname)) {
-
     return
   }
   return (
@@ -16,7 +15,7 @@ function Footer(props) {
       {/* Link的本质是a标签 */}
       <Link to="/home" className={classnames({ active: pathname == '/home' || pathname == '/' })}>
         <div className="icon_home"></div>
-        <div className='footer_home'>首页</div>
+        <div className="footer_home">首页</div>
       </Link>
       {/* <Link to="/member" className={classnames({ active: pathname == '/member' })}>
         <div className="icon_member"></div>
@@ -24,11 +23,11 @@ function Footer(props) {
       </Link> */}
       <Link to="/order" className={classnames({ active: pathname == '/order' })}>
         <div className="icon_order"></div>
-        <div className='footer_order'>订单</div>
+        <div className="footer_order">订单</div>
       </Link>
       <Link to="/mine" className={classnames({ active: pathname == '/mine' })}>
         <div className="icon_mine"></div>
-        <div className='footer_mine'>我的</div>
+        <div className="footer_mine">我的</div>
       </Link>
     </FooterWrapper>
   )

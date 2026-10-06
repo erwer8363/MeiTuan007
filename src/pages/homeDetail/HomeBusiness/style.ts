@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-// css in js 
+// css in js
 export const Wrapper = styled.div`
-    .seller {
+  .seller {
     position: absolute;
     left: 0;
     top: 13.2rem;
     bottom: 0px;
     width: 100%;
-    background: #F4F4F4;
+    background: #f4f4f4;
     overflow: hidden;
   }
 
@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   .seller .seller-wrapper .seller-view .address-wrapper {
     display: flex;
     padding: 0.727rem 0;
-    border-bottom: 0.09rem solid #F4F4F4;
+    border-bottom: 0.09rem solid #f4f4f4;
   }
 
   .seller .seller-wrapper .seller-view .address-wrapper .address-left {
@@ -51,7 +51,7 @@ export const Wrapper = styled.div`
   .seller .seller-wrapper .seller-view .pics-wrapper {
     padding: 0.454rem 0;
     overflow: hidden;
-    border-bottom: 0.09rem solid #F4F4F4;
+    border-bottom: 0.09rem solid #f4f4f4;
     white-space: nowrap;
   }
 
@@ -92,7 +92,7 @@ export const Wrapper = styled.div`
     background-size: 0.636rem 0.727rem;
     padding: 0.681rem 0 0.681rem 1.136rem;
     font-size: 0.636rem;
-    border-bottom: 0.09rem solid #F4F4F4;
+    border-bottom: 0.09rem solid #f4f4f4;
   }
 
   .seller .seller-wrapper .tip-wrapper .shipping-wrapper {
@@ -112,7 +112,7 @@ export const Wrapper = styled.div`
     background-size: 0.681rem 0.681rem;
     padding: 0.681rem 0 0.77rem 1.136rem;
     font-size: 0.636rem;
-    border-bottom: 0.09rem solid #F4F4F4;
+    border-bottom: 0.09rem solid #f4f4f4;
   }
 
   .seller .seller-wrapper .other-wrapper .server-wrapper .poi-server {
@@ -148,5 +148,4 @@ export const Wrapper = styled.div`
     flex: 1;
     font-size: 0.636rem;
   }
-
 `

@@ -9,8 +9,7 @@ import 'font-awesome/css/font-awesome.min.css'
 // 使用redux
 import { Provider } from 'react-redux'
 import store from './store'
-import { PersistGate } from 'redux-persist/lib/integration/react';
-
+import { PersistGate } from 'redux-persist/lib/integration/react'
 
 initRem()
 
@@ -21,6 +20,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <App />
       </PersistGate>
     </BrowserRouter>
-  </Provider>
-
+  </Provider>,
 )

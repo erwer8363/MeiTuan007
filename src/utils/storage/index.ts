@@ -1,9 +1,4 @@
-
-
 export const localStorageKey = 'yyx'
-
-
-
 
 const Cookie = {
   // 熊猫博士H5登录系统的cookie
@@ -13,8 +8,8 @@ const Cookie = {
     local: 'dev-',
     dev: 'dev-',
     pre: 'pre-',
-    prod: 'prod-'
-  }
+    prod: 'prod-',
+  },
 }
 
 const getCookieName = (name) => {
@@ -41,7 +36,7 @@ export const setCookie = (name, value, days = 30) => {
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000)
 
   document.cookie = `${cookieName}=${encodeURIComponent(
-    value
+    value,
   )};expires=${expires.toUTCString()};path=${Cookie.Path}`
 }
 

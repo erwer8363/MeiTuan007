@@ -10,20 +10,20 @@ import { persistReducer, persistStore } from 'redux-persist'
 //  存储机制，可换成其他机制，当前使用sessionStorage机制
 // Vite 8 下 redux-persist 的 CJS 默认导出互操作失败，改为手写 sessionStorage 适配（阶段 5 随 redux-persist 一起删除）
 const storageSession = {
-    getItem: (key: string) => Promise.resolve(sessionStorage.getItem(key)),
-    setItem: (key: string, value: string) => Promise.resolve(sessionStorage.setItem(key, value)),
-    removeItem: (key: string) => Promise.resolve(sessionStorage.removeItem(key)),
+  getItem: (key: string) => Promise.resolve(sessionStorage.getItem(key)),
+  setItem: (key: string, value: string) => Promise.resolve(sessionStorage.setItem(key, value)),
+  removeItem: (key: string) => Promise.resolve(sessionStorage.removeItem(key)),
 }
 // import storage from 'redux-persist/lib/storage'; //localStorage机制
 //import { AsyncStorage } from 'react-native'; //react-native
 
 // 数据对象
 const storageConfig = {
-    key: 'root', // 必须有的
-    storage: storageSession, // 缓存机制
-    // reducer 里不持久化的数据,除此外均为持久化数据
-};
-import { thunk } from "redux-thunk"
+  key: 'root', // 必须有的
+  storage: storageSession, // 缓存机制
+  // reducer 里不持久化的数据,除此外均为持久化数据
+}
+import { thunk } from 'redux-thunk'
 import reducer from './reducer'
 // 组件 中间件redux-thunk    数据
 // Redux的中间件，处于Action和Reducer之间，将中间某个过程拦截一下，进行一些处理再继续正常执行，这就是中间件的功能。
@@ -34,14 +34,10 @@ import reducer from './reducer'
 // 接受函数参数的能力。具体来说，如果dispatch方法中传递的是一个对象，那么直接按照正常的Redux工作流来运行，但如果是一个函数，那么直接执行它，
 // 并把store.dispatch这个方法当作第一个参数传进这个函数。
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const myPersistReducer = persistReducer(storageConfig, reducer);
-const store = createStore(myPersistReducer,
-    composeEnhancers(
-        applyMiddleware(thunk)
-    ))
+const myPersistReducer = persistReducer(storageConfig, reducer)
+const store = createStore(myPersistReducer, composeEnhancers(applyMiddleware(thunk)))
 // console.log(store.getState())
 // 得到store下的状态分支
 // business: {BusinessList: Array(0), Loading: true}
@@ -52,10 +48,9 @@ const store = createStore(myPersistReducer,
 // search: {enterLoading: false}
 // [[Prototype]]: Object
 
-
 const persistor = persistStore(store)
 
 export default {
-    store,
-    persistor
+  store,
+  persistor,
 }

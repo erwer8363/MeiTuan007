@@ -12,19 +12,16 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const loginData = {
     phone: phone,
-    password: password
+    password: password,
   }
   const HandleLogin = (e) => {
     e.preventDefault()
-    axios.post('/api/users/login', loginData).then(res => {
-      console.log(loginData);
-      console.log(res);
-     
-      
+    axios.post('/api/users/login', loginData).then((res) => {
+      console.log(loginData)
+      console.log(res)
     })
-    setCookie('usertoken','token')
+    setCookie('usertoken', 'token')
     navigate('/home')
-   
   }
   // action='http://127.0.0.1:8080/api/users/login'
   return (
@@ -33,7 +30,7 @@ const Login = () => {
         <div className="pic">
           <img src={loginPic} alt="" />
         </div>
-        <form className="form" method='post' >
+        <form className="form" method="post">
           <div className="phone">
             <input
               className="phoneNumInput"
@@ -41,9 +38,10 @@ const Login = () => {
               placeholder="请输入手机号"
               maxLength="11"
               onChange={(e) => setPhone(e.currentTarget.value)}
-              value={phone} />
+              value={phone}
+            />
             <div className="sendCodeBtn" id="sendCodeBtn">
-              <span >发送验证码</span>
+              <span>发送验证码</span>
             </div>
           </div>
           <div className="password">
@@ -53,22 +51,37 @@ const Login = () => {
               maxLength="6"
               placeholder="请输入密码"
               onChange={(e) => setPassword(e.currentTarget.value)}
-              value={password} />
+              value={password}
+            />
           </div>
-          <input className='btn_login' onClick={(e) => HandleLogin(e)} type='submit' value='登录'></input>
+          <input
+            className="btn_login"
+            onClick={(e) => HandleLogin(e)}
+            type="submit"
+            value="登录"
+          ></input>
         </form>
-        <div className='tonext'>
-          <p>还没有账号？<span onClick={() => navigate('/register')}>请先注册</span></p>
+        <div className="tonext">
+          <p>
+            还没有账号？<span onClick={() => navigate('/register')}>请先注册</span>
+          </p>
         </div>
         <div className="license">
-          <div className="icon" >
-            <i onClick={(e) => {
-              e.currentTarget.classList.toggle('clickBG')
-            }}></i>
+          <div className="icon">
+            <i
+              onClick={(e) => {
+                e.currentTarget.classList.toggle('clickBG')
+              }}
+            ></i>
           </div>
           <div className="text">
-            我已阅读并同意<a href="https://rules-center.meituan.com/m/detail/4" style={{ color: "#3488FF" }}>《美团用户协议》、</a>
-            <a href="https://rules-center.meituan.com/m/detail/2" style={{ color: "#3488FF" }}>《隐私政策》</a>
+            我已阅读并同意
+            <a href="https://rules-center.meituan.com/m/detail/4" style={{ color: '#3488FF' }}>
+              《美团用户协议》、
+            </a>
+            <a href="https://rules-center.meituan.com/m/detail/2" style={{ color: '#3488FF' }}>
+              《隐私政策》
+            </a>
             ，并授权美团使用该美团账号信息（如昵称、头像、收货地址）进行统一管理
           </div>
         </div>

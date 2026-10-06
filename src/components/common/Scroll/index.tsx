@@ -1,30 +1,40 @@
-import { useState, useEffect, useRef, useImperativeHandle, useMemo, type ReactNode, type Ref } from "react"
-import BScroll from "better-scroll"
-import styled from 'styled-components';
-import Loading from '../loading/index';
-import Loading2 from '../loading-v2/index';
-import { debounce } from "@/utils";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  useMemo,
+  type ReactNode,
+  type Ref,
+} from 'react'
+import BScroll from 'better-scroll'
+import styled from 'styled-components'
+import Loading from '../loading/index'
+import Loading2 from '../loading-v2/index'
+import { debounce } from '@/utils'
 const ScrollContainer = styled.div`
- width: 100%;
- height: 100%;
- overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `
 const PullUpLoading = styled.div`
- position: absolute;
- left:0; right:0;
- bottom: 5px;
- width: 60px;
- height: 60px;
- margin: auto;
- z-index: 100;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  z-index: 100;
 `
 export const PullDownLoading = styled.div`
- position: absolute;
- left:0; right:0;
- top: 0px;
- height: 30px;
- margin: auto;
- z-index: 100;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0px;
+  height: 30px;
+  margin: auto;
+  z-index: 100;
 `
 // 下为问题代码，以此为鉴
 // useEffect(() => {
@@ -198,9 +208,13 @@ const Scroll = ({
     <ScrollContainer ref={scrollContaninerRef}>
       {children}
       {/* 滑到底部加载动画 */}
-      <PullUpLoading style={PullUpdisplayStyle}><Loading /></PullUpLoading>
+      <PullUpLoading style={PullUpdisplayStyle}>
+        <Loading />
+      </PullUpLoading>
       {/* 顶部下拉刷新动画 */}
-      <PullDownLoading style={PullDowndisplayStyle}><Loading2 /></PullDownLoading>
+      <PullDownLoading style={PullDowndisplayStyle}>
+        <Loading2 />
+      </PullDownLoading>
     </ScrollContainer>
   )
 }

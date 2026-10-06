@@ -9,11 +9,11 @@ interface IProps {
 // 子组件一般不做数据请求 由父组件统一并传参过来
 const CitySelect = (props: IProps) => {
   let { cityName } = props
-    useEffect(() => {
-        cityName == '' && window.sessionStorage.getItem('cityName')
-            ? (cityName = window.sessionStorage.getItem('cityName'))
-            : (window.sessionStorage.cityName = cityName)
-    },[])
+  useEffect(() => {
+    cityName == '' && window.sessionStorage.getItem('cityName')
+      ? (cityName = window.sessionStorage.getItem('cityName'))
+      : (window.sessionStorage.cityName = cityName)
+  }, [])
 
   return (
     <Link className={styles.citygps} to="/cities">

@@ -10,17 +10,16 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const resigsterData = {
     phone: phone,
-    password: password
+    password: password,
   }
   // console.log(resigsterData);
   const HandleRegister = (e) => {
     e.preventDefault()
-    axios.post('/api/users/register', resigsterData).then(res => {
-      console.log(resigsterData);
-      console.log(res);
+    axios.post('/api/users/register', resigsterData).then((res) => {
+      console.log(resigsterData)
+      console.log(res)
     })
     navigate('/login')
-
   }
   return (
     <Wrapper>
@@ -28,7 +27,7 @@ const Register = () => {
         <div className="pic">
           <img src={loginPic} alt="" />
         </div>
-        <form className="form" method='post' >
+        <form className="form" method="post">
           <div className="phone">
             <input
               className="phoneNumInput"
@@ -36,27 +35,42 @@ const Register = () => {
               placeholder="请输入手机号"
               maxLength="11"
               onChange={(e) => setPhone(e.currentTarget.value)}
-              value={phone} />
+              value={phone}
+            />
           </div>
           <div className="password">
-            <input className="codeInput"
+            <input
+              className="codeInput"
               type="password"
               maxLength="6"
               placeholder="请输入密码"
               onChange={(e) => setPassword(e.currentTarget.value)}
-              value={password} />
+              value={password}
+            />
           </div>
-          <input className='btn_login' onClick={(e) => HandleRegister(e)} type='submit' value='注册'></input>
+          <input
+            className="btn_login"
+            onClick={(e) => HandleRegister(e)}
+            type="submit"
+            value="注册"
+          ></input>
         </form>
         <div className="license">
-          <div className="icon" >
-            <i onClick={(e) => {
-              e.currentTarget.classList.toggle('clickBG')
-            }}></i>
+          <div className="icon">
+            <i
+              onClick={(e) => {
+                e.currentTarget.classList.toggle('clickBG')
+              }}
+            ></i>
           </div>
           <div className="text">
-            我已阅读并同意<a href="https://rules-center.meituan.com/m/detail/4" style={{ color: "#3488FF" }}>《美团用户协议》、</a>
-            <a href="https://rules-center.meituan.com/m/detail/2" style={{ color: "#3488FF" }}>《隐私政策》</a>
+            我已阅读并同意
+            <a href="https://rules-center.meituan.com/m/detail/4" style={{ color: '#3488FF' }}>
+              《美团用户协议》、
+            </a>
+            <a href="https://rules-center.meituan.com/m/detail/2" style={{ color: '#3488FF' }}>
+              《隐私政策》
+            </a>
             ，并授权美团使用该美团账号信息（如昵称、头像、收货地址）进行统一管理
           </div>
         </div>

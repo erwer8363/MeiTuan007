@@ -7,12 +7,12 @@ import loadingPic from '@/assets/images/loading.gif'
 import { lazyload } from '@/utils'
 import { InfiniteScroll } from 'antd-mobile'
 import { mockRequest } from './data'
-import {useAtomValue} from "jotai";
-import {loadingAtom, restaurantsAtom} from "@/atoms/homeStore";
+import { useAtomValue } from 'jotai'
+import { loadingAtom, restaurantsAtom } from '@/atoms/homeStore'
 
 const StoreInfo = () => {
-    const loading = useAtomValue(loadingAtom)
-    const restaurants = useAtomValue(restaurantsAtom)
+  const loading = useAtomValue(loadingAtom)
+  const restaurants = useAtomValue(restaurantsAtom)
 
   const [data, setData] = useState([])
   const [hasMore, setHasMore] = useState(true)

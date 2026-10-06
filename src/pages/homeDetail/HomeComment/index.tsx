@@ -10,23 +10,22 @@ import loadingPic from '@/assets/images/loading.gif'
 import { lazyload } from '@/utils'
 
 function HomeComment(props) {
-
   const { comments, navList, loading } = props
   const { getCommentsListDispatch, getNavListDispatch } = props
   useEffect(() => {
     getCommentsListDispatch()
     getNavListDispatch()
-    lazyload(".content img")
+    lazyload('.content img')
   }, [])
 
-
   const navlist = () => {
-    return navList.map(item => {
+    return navList.map((item) => {
       return (
-        <span className='item' key={item.label_id}>{item.content}</span>
+        <span className="item" key={item.label_id}>
+          {item.content}
+        </span>
       )
     })
-
   }
   const contentlist = () => {
     return comments.map((item) => {
@@ -36,12 +35,8 @@ function HomeComment(props) {
             <img src={item.user_pic_url ? item.user_pic_url : starImg} />
           </div>
           <div className="comment-main">
-            <div className="user">
-              {item.user_name}
-            </div>
-            <div className="time">
-              {new Date().toLocaleDateString()}
-            </div>
+            <div className="user">{item.user_name}</div>
+            <div className="time">{new Date().toLocaleDateString()}</div>
             <div className="star-wrapper">
               <span className="text">评分</span>
               <div className="star star">
@@ -55,20 +50,15 @@ function HomeComment(props) {
 
             <div className="content">
               <span>{item.comment}</span>
-              {item.user_pic_url &&
-                <img data-src={item.user_pic_url} src={loadingPic} />
-              }
+              {item.user_pic_url && <img data-src={item.user_pic_url} src={loadingPic} />}
             </div>
           </div>
         </li>
       )
     })
-
-
   }
   return (
     <Wrapper>
-
       <div className="rating">
         <div className="rating-left">
           <div className="rating-left-hd">4.5</div>
@@ -100,38 +90,23 @@ function HomeComment(props) {
         </div>
       </div>
       <Tabs>
-        <Tabs.Tab title='全部' key='all'>
-          <div className="labels-view">
-            {
-              navlist()
-            }
-          </div>
-          <ul className='rating-list'>
-            {contentlist()}
-          </ul>
+        <Tabs.Tab title="全部" key="all">
+          <div className="labels-view">{navlist()}</div>
+          <ul className="rating-list">{contentlist()}</ul>
         </Tabs.Tab>
-        <Tabs.Tab title='有图' key='pic'>
-          <div className="labels-view">
-            {
-              navlist()
-            }
-          </div>
-          <ul className='rating-list'>
-            {
-              comments.map((item) => {
-                return (
-                  item.user_pic_url &&
+        <Tabs.Tab title="有图" key="pic">
+          <div className="labels-view">{navlist()}</div>
+          <ul className="rating-list">
+            {comments.map((item) => {
+              return (
+                item.user_pic_url && (
                   <li className="comment-item" key={item.wm_comment_id}>
                     <div className="comment-header">
                       <img src={item.user_pic_url ? item.user_pic_url : starImg} />
                     </div>
                     <div className="comment-main">
-                      <div className="user">
-                        {item.user_name}
-                      </div>
-                      <div className="time">
-                        {new Date().toLocaleDateString()}
-                      </div>
+                      <div className="user">{item.user_name}</div>
+                      <div className="time">{new Date().toLocaleDateString()}</div>
                       <div className="star-wrapper">
                         <span className="text">评分</span>
                         <div className="star star">
@@ -146,37 +121,30 @@ function HomeComment(props) {
                       <div className="content">
                         <span>{item.comment}</span>
                         <img data-src={item.user_pic_url} src={loadingPic} />
-
                       </div>
                     </div>
                   </li>
                 )
-              })
-            }
+              )
+            })}
           </ul>
         </Tabs.Tab>
         <Tabs.Tab
           title={
-            <Badge content='222' style={{ '--right': '-10px', '--top': '8px' }}>
+            <Badge content="222" style={{ '--right': '-10px', '--top': '8px' }}>
               点评
             </Badge>
           }
-          key='animals'
+          key="animals"
         >
-          <div className="labels-view">
-            {
-              navlist()
-            }
-          </div>
+          <div className="labels-view">{navlist()}</div>
         </Tabs.Tab>
       </Tabs>
-      {
-        loading ?
-          <EnterLoading>
-            <Loading></Loading>
-          </EnterLoading> : null
-      }
-
+      {loading ? (
+        <EnterLoading>
+          <Loading></Loading>
+        </EnterLoading>
+      ) : null}
     </Wrapper>
   )
 }
@@ -184,7 +152,7 @@ const mapStateToProps = (state) => {
   return {
     comments: state.comment.CommentsList,
     navList: state.comment.NavList,
-    loading: state.comment.Loading
+    loading: state.comment.Loading,
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -195,7 +163,6 @@ const mapDispatchToProps = (dispatch) => {
     getNavListDispatch() {
       dispatch(getNavList())
     },
-
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(memo(HomeComment))

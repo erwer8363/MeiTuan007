@@ -1,22 +1,20 @@
 import styled from 'styled-components'
 
 export const EnterLoading = styled.div`
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    margin: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 `
 export const Wrapper = styled.div`
-
-
-.siderbar-bg {
-  background-color: #fff;
-}
-.goods {
+  .siderbar-bg {
+    background-color: #fff;
+  }
+  .goods {
     display: flex;
     position: absolute;
     top: 12.73rem;
@@ -31,22 +29,21 @@ export const Wrapper = styled.div`
     overflow: auto;
     margin-top: 1rem;
     &::-webkit-scrollbar {
-            display: none;
-        }
+      display: none;
+    }
   }
 
   .goods .foods-wrapper {
     flex: 1;
     overflow: auto;
     &::-webkit-scrollbar {
-            display: none;
-        }
-
+      display: none;
+    }
   }
   .goods .menu-wrapper .menu-item {
     list-style-type: none;
     padding: 0.72rem 1.05rem 0.68rem 0.45rem;
-    border-bottom: 1px solid #E4E4E4;
+    border-bottom: 1px solid #e4e4e4;
     position: relative;
   }
 
@@ -67,7 +64,7 @@ export const Wrapper = styled.div`
   /* 专场样式 */
   .goods .foods-wrapper .container-list {
     padding: 0.5rem 0.5rem 0 0.5rem;
-    border-bottom: 1px solid #E4E4E4;
+    border-bottom: 1px solid #e4e4e4;
   }
 
   .goods .foods-wrapper .container-list img {
@@ -80,9 +77,9 @@ export const Wrapper = styled.div`
   .goods .foods-wrapper .food-list {
     padding: 0.5rem;
   }
-.food-container {
-    margin:1rem 0 2rem 0;
-}
+  .food-container {
+    margin: 1rem 0 2rem 0;
+  }
   .goods .foods-wrapper .food-list .title {
     height: 0.6rem;
     font-size: 0.6rem;
@@ -107,7 +104,7 @@ export const Wrapper = styled.div`
     height: 3.6rem;
   }
   .goods .foods-wrapper .food-list .food-item .icon img {
-        width:3rem;
+    width: 3rem;
   }
 
   .goods .foods-wrapper .food-list .food-item .content {
@@ -138,7 +135,7 @@ export const Wrapper = styled.div`
 
   .goods .foods-wrapper .food-list .food-item .content .extra {
     font-size: 0.45rem;
-    color: #BFBFBF;
+    color: #bfbfbf;
     margin-bottom: 0.58rem;
   }
 
@@ -153,8 +150,8 @@ export const Wrapper = styled.div`
 
   .goods .foods-wrapper .food-list .food-item .content .price {
     font-size: 0;
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -165,7 +162,7 @@ export const Wrapper = styled.div`
 
   .goods .foods-wrapper .food-list .food-item .content .price .unit {
     font-size: 0.545rem;
-    color: #BFBFBF;
+    color: #bfbfbf;
   }
 
   /* 当前选中 */
@@ -174,7 +171,7 @@ export const Wrapper = styled.div`
     font-weight: bold;
     margin-top: -1px;
   }
- 
+
   .goods .menu-wrapper .menu-item:first-child.current {
     margin-top: 1px;
   }
@@ -199,73 +196,72 @@ export const Wrapper = styled.div`
     line-height: 0.6rem;
   }
 
-
-
   .price-right {
     font-size: 0.72rem;
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     .price-right_reduce {
-    background-image: url("https://p0.meituan.net/openhfiveimages/86a6957f27823b06a23c26be8aea5579725.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-.price-right_reduce, .price-right_add {
-    width: 5.33333333vw;
-    height: 5.33333333vw;
-    background-size: 5.33333333vw 5.33333333vw;
-    position: relative;
-}
-.reduce-box, .add-box {
-    position: absolute;
-    left: -3.33333333vw;
-    right: -3.33333333vw;
-    top: -3.33333333vw;
-    bottom: -3.33333333vw;
-}
-.price-right_num {
-    width: 8vw;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.73333333vw;
-    color: #222426;
-    letter-spacing: 0.05333333vw;
-}
-.price-right_add {
-    background-image: url('https://p0.meituan.net/openhfiveimages/9daf1aae3cc53f1597c659262cc49545610.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-.price-right_reduce, .price-right_add {
-    width: 5.33333333vw;
-    height: 5.33333333vw;
-    background-size: 5.33333333vw 5.33333333vw;
-    position: relative;
-}
-.reduce-box {
-    position: absolute;
-    left: -3.33333333vw;
-    right: -3.33333333vw;
-    top: -3.33333333vw;
-    bottom: -3.33333333vw;
-}
-}
+      background-image: url('https://p0.meituan.net/openhfiveimages/86a6957f27823b06a23c26be8aea5579725.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .price-right_reduce,
+    .price-right_add {
+      width: 5.33333333vw;
+      height: 5.33333333vw;
+      background-size: 5.33333333vw 5.33333333vw;
+      position: relative;
+    }
+    .reduce-box,
+    .add-box {
+      position: absolute;
+      left: -3.33333333vw;
+      right: -3.33333333vw;
+      top: -3.33333333vw;
+      bottom: -3.33333333vw;
+    }
+    .price-right_num {
+      width: 8vw;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.73333333vw;
+      color: #222426;
+      letter-spacing: 0.05333333vw;
+    }
+    .price-right_add {
+      background-image: url('https://p0.meituan.net/openhfiveimages/9daf1aae3cc53f1597c659262cc49545610.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .price-right_reduce,
+    .price-right_add {
+      width: 5.33333333vw;
+      height: 5.33333333vw;
+      background-size: 5.33333333vw 5.33333333vw;
+      position: relative;
+    }
+    .reduce-box {
+      position: absolute;
+      left: -3.33333333vw;
+      right: -3.33333333vw;
+      top: -3.33333333vw;
+      bottom: -3.33333333vw;
+    }
+  }
 
-
-
-.menu-item-icon.menu-item-iconv2 {
+  .menu-item-icon.menu-item-iconv2 {
     width: 36px;
     border-radius: 0.545rem;
-}
-.menu-item-icon {
+  }
+  .menu-item-icon {
     position: absolute;
     top: 1px;
     right: 0px;
     color: #fff;
-    background-color: #FB4E44;
+    background-color: #fb4e44;
     font-size: 0.45rem;
     width: 24px;
     height: 24px;
@@ -275,5 +271,5 @@ export const Wrapper = styled.div`
     transform: scale(0.5) translate(50%, -50%);
     border-radius: 50%;
     text-align: center;
-}
+  }
 `

@@ -1,7 +1,7 @@
 import * as actionTypes from './constants'
 // import {
 //     getKeywordsRequest,
-   
+
 // } from '@/api/request'
 
 // const changeKeywords = (data) => ({
@@ -10,8 +10,8 @@ import * as actionTypes from './constants'
 // })
 
 export const changeEnterLoading = (data) => ({
-    type: actionTypes.SET_ENTER_LOADING,
-    data
+  type: actionTypes.SET_ENTER_LOADING,
+  data,
 })
 
 // export const getKeywords = () => {
@@ -23,5 +23,4 @@ export const changeEnterLoading = (data) => ({
 //                 console.log(action);
 //             })
 //     }
-// } 
-
+// }

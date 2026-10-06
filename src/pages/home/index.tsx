@@ -10,8 +10,8 @@ import Banners from './Banners'
 import Modal from './Modal'
 // api
 import { isFixed, backGroundColor, throttle } from '@/utils'
-import {useAtomValue, useSetAtom} from 'jotai'
-import {bannersViewAtom, loadRestaurantsAtom} from '@/atoms/homeStore'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { bannersViewAtom, loadRestaurantsAtom } from '@/atoms/homeStore'
 
 function Home() {
   const navigate = useNavigate()
