@@ -8,7 +8,12 @@ import { createStore, compose, applyMiddleware } from 'redux'
 // redux 数据持久化
 import { persistReducer, persistStore } from 'redux-persist'
 //  存储机制，可换成其他机制，当前使用sessionStorage机制
-import storageSession from 'redux-persist/lib/storage/session';
+// Vite 8 下 redux-persist 的 CJS 默认导出互操作失败，改为手写 sessionStorage 适配（阶段 5 随 redux-persist 一起删除）
+const storageSession = {
+    getItem: (key: string) => Promise.resolve(sessionStorage.getItem(key)),
+    setItem: (key: string, value: string) => Promise.resolve(sessionStorage.setItem(key, value)),
+    removeItem: (key: string) => Promise.resolve(sessionStorage.removeItem(key)),
+}
 // import storage from 'redux-persist/lib/storage'; //localStorage机制
 //import { AsyncStorage } from 'react-native'; //react-native
 

@@ -58,19 +58,27 @@
 每个阶段 = 一个 `feat/` 分支或一组独立 commit，完成后可运行、可回退。
 
 ### 阶段 0：准备（0.5h）
-- [ ] 新建分支 `feat/upgrade-react19-ts-jotai`
-- [ ] `npm run build` 记录旧版本基线（能否构建、产物大小），旧页面截图留档
-- [ ] 删除垃圾依赖：`loadsh`、`react-route`、`react-thunk`、`react-weui`、`weui`
-- [ ] 把 `vite`、`@types/*`、`gh-pages` 移到 `devDependencies`
+- [x] 新建分支 `feat/upgrade-react19-ts-jotai`
+- [x] `npm run build` 记录旧版本基线（能否构建、产物大小），旧页面截图留档
+- [x] 删除垃圾依赖：`loadsh`、`react-route`、`react-thunk`、`react-weui`、`weui`
+- [x] 把 `vite`、`@types/*`、`gh-pages` 移到 `devDependencies`
 
 ### 阶段 1：工具链升级 — Vite + TS + SCSS（2h）
-- [ ] 升级 `vite`、`@vitejs/plugin-react`，安装 `typescript`、`sass`
-- [ ] 新增 `tsconfig.json`（`strict: true`、`paths: {"@/*": ["src/*"]}`）、`tsconfig.node.json`
-- [ ] `vite.config.js` → `vite.config.ts`，修正 `changeOrigin`、`open` 位置，别名保持 `@`
-- [ ] `index.html` 入口改 `/src/main.tsx`；`public/js/adapter.js` 改写为 `src/utils/rem.ts` 并在 `main.tsx` 引入
-- [ ] 添加 ESLint + Prettier，`package.json` 补 `typecheck` / `lint` 脚本
-- [ ] 文件批量改名：`.jsx → .tsx`、`.js → .ts`，先允许 `any` 标注 `// TODO(ts)`，**阶段 3 再收紧**
+- [x] 升级 `vite`、`@vitejs/plugin-react`，安装 `typescript`、`sass`
+- [x] 新增 `tsconfig.json`（`strict: true`，临时 `noImplicitAny: false`、`paths: {"@/*": ["src/*"]}`）、`tsconfig.node.json`
+- [x] `vite.config.js` → `vite.config.ts`，修正 `changeOrigin`、`open` 位置，别名保持 `@`
+- [x] `index.html` 入口改 `/src/main.tsx`；`public/js/adapter.js` 改写为 `src/utils/rem.ts` 并在 `main.tsx` 引入
+- [x] 补 `typecheck` 脚本；⏭ ESLint + Prettier 推迟（TS 7 与 eslint 生态需先确认兼容，放到阶段 3 前处理）
+- [x] 文件批量改名：`.jsx → .tsx`、`.js → .ts`，先允许 `any` 标注 `// TODO(ts)`，**阶段 3 再收紧**
 - 验收：`npm run dev` 能起、`npm run typecheck` 能跑（允许临时报错数在下降）
+
+**阶段 0/1 实际结果（2026-10-06）**
+- 基线：旧版原样**无法构建**（`search-box` 误引 `@/api/utils`，已修为 `@/utils`）；修后旧版 dist 2.2M，主 chunk 434 KiB / gzip 132 KiB。
+- 新版：`vite build` 通过，dist 2.0M，主 chunk 359 KiB / gzip 104 KiB。
+- `npm run typecheck` 现有 109 个错误（TS2339 居多），均为未补类型所致，阶段 3 清零。
+- TS 7 已移除 `baseUrl`，`paths` 改为 `./src/*`；Vite 8 的 lightningcss 不接受 `*zoom` 等 IE hack，已从 `reset.css` 删除。
+- redux-persist 的 `storage/session` 在 Vite 8 下 CJS 互操作失败，临时改为手写 sessionStorage 适配（阶段 5 随 redux 一并删除）。
+- 浏览器验证：登录重定向、`/home` 渲染正常、无控制台报错；餐厅列表为空，原因是 fastmock 接口（见风险表）。
 
 ### 阶段 2：React 19 + Router 7（1.5h）
 - [ ] `react` / `react-dom` / `@types/react*` 升到 19；清理 `React.FC` 与 `import React`（新 JSX transform 不需要）
