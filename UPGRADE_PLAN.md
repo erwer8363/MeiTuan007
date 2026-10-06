@@ -40,7 +40,7 @@
 |---|---|---|
 | React | `react` / `react-dom` **19.x**（最新稳定） | 学习点：`ref` 作为 prop、`use()`、Actions、`useActionState`、`useOptimistic`、`<title>` 原生支持 |
 | 构建 | **Vite 8** + `@vitejs/plugin-react` | 要求 Node ≥ 20.19，本机 Node 24 OK |
-| 语言 | **TypeScript**（strict） | 若 TS 7 与 eslint 生态不兼容，退回 5.x 最新 |
+| 语言 | **TypeScript 6.0**（strict） | TS 7 与 typescript-eslint 暂不兼容，已退回 6.0 |
 | 样式 | **SCSS + CSS Modules**（`*.module.scss`） | 去掉 styled-components；全局 token 放 `styles/_variables.scss` |
 | 状态 | **Jotai** | 学习重点，见第 4 节 |
 | 路由 | `react-router`（v7，declarative 模式） | v7 起统一从 `react-router` 引入，`react-router-dom` 仅作兼容 |
@@ -99,11 +99,23 @@
 - `npm run typecheck` 当前 84 个错误（阶段 3 处理）。
 
 ### 阶段 3：TypeScript 类型补全（2h）
-- [ ] 为 JSON/接口数据建模，放 `src/types/`：`Restaurant`、`Banner`、`City`、`Goods`/`GoodsCategory`/`Spu`、`Rating`、`Seller`、`UserLoginPayload`
-- [ ] `src/api/` 拆成 `request.ts`（axios 实例）+ `modules/*.ts`（每个函数带返回类型）
-- [ ] 修复拦截器：不再引用未定义变量，token 从 Jotai 之外的 `storage` 读（拦截器在 React 外）
-- [ ] 清零所有 `// TODO(ts)`；禁用 `any`，必要处用 `unknown` + 类型守卫
-- 验收：`npm run typecheck` 0 错误
+**分工：架子由 Claude 搭好（下面标 ✅），具体类型修复和写法升级由 Ever 完成，Claude 负责 review。**
+- [x] ✅ 数据建模，放 `src/types/`：`Restaurant`、`Banner`、`City`、`GoodsCategory/Spu`、`RatingData`、`Seller`、`LoginPayload`、`ApiResponse<T>`（带 `TODO(ts)` 的字段按需补）
+- [x] ✅ `src/api/` 重组：`http.ts`（axios 实例 + 拦截器 + `get/post`）、`endpoints.ts`（mock/真实地址表 + `VITE_USE_MOCK` 开关）、`modules/{home,detail,user}.ts`（带类型的 `fetchXxx`）、`request.ts`（**旧 redux 用的兼容层**，阶段 5 删除）
+- [x] ✅ mock 数据脱离 fastmock：`public/data/` 补全 `cities.json`、`banners.json`；删除重复的 `src/assets/data/`
+- [x] ✅ 环境变量：`.env.development` / `.env.production` / `.env.example`，`vite-env.d.ts` 里有类型声明
+- [x] ✅ ESLint（flat config + typescript-eslint + react-hooks）+ Prettier，脚本 `lint` / `format`
+- [ ] 🧑 Ever：把页面里的 `props`、`useState`、事件参数补上类型，改用 `@/api` 的 `fetchXxx`（旧 `request.ts` 不再被引用后即可删）
+- [ ] 🧑 Ever：删除 tsconfig 里的 `"noImplicitAny": false`，清零 `npm run typecheck`
+- [ ] 🧑 Ever：清零 `npm run lint` 的 error（`prefer-const`、`no-unused-vars` 可 `eslint --fix` 部分自动修）
+- [ ] 🧑 Ever：`Login` / `Register` 改用 `@/api` 的 `login` / `register`，并补响应类型
+- 验收：`npm run typecheck` 0 错误，`npm run lint` 0 error
+
+**阶段 3 架子的决策记录**
+- **TypeScript 从 7.0 退回 6.0.3**：`typescript-eslint` 的 peer 要求 `typescript <6.1`，TS 7（原生版）没有稳定的 JS API，装不上。等 typescript-eslint 支持 TS 7 后再升（风险表里已预判）。
+- mock 开关：`VITE_USE_MOCK=true` 读 `${BASE_URL}data/*.json`（兼容 GitHub Pages 的 `/MeiTuan007/` 前缀）；`false` 走 `VITE_API_BASE_URL`。
+- 响应形态保持与旧数据一致：restaurants/banners/cities 是裸数组；goods/ratings/seller 是 `{code,msg,data}`。
+- 已知旧 bug（未改）：`HomeDetail` 在 `useEffect` 里无条件 `navigate('/homedetail/:id/order')`，导致直接访问 `/comment`、`/business` 会被弹回点餐页。
 
 ### 阶段 4：styled-components → SCSS Modules（4~5h，量最大）
 - [ ] 建 `src/styles/`：`_variables.scss`（颜色、字号、rem 函数）、`_mixins.scss`、`global.scss`（吃掉 `reset.css`）

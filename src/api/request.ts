@@ -1,18 +1,13 @@
-import axios from 'axios'
+/**
+ * @deprecated 兼容层：旧的 redux actionCreators 仍按 `res.data` 取值（AxiosResponse）。
+ * 新代码请用 `@/api` 里的 fetchXxx；阶段 5 删除 redux 时一并删除本文件。
+ */
+import { http } from './http'
+import { resolveUrl } from './endpoints'
 
-export const getCitiesRequest = () =>
-    axios.get('https://www.fastmock.site/mock/fc09142a9029fcb292822d4ee872f52b/beers/cities')
-export const getBannersRequest = () =>
-    axios.get('https://www.fastmock.site/mock/0a7dd8897c829f1675e2e5962a305383/MeiTuan/banners')
-export const getRestaurantsRequest = () =>
-    axios.get('https://www.fastmock.site/mock/0a7dd8897c829f1675e2e5962a305383/MeiTuan/restaurants')
-export const getHomeDetailOrderRequest = () =>
-    axios.get('/src/assets/data/goods.json')
-// export const getHomeDetailOrderRequest = () =>
-//     axios.get('https://fate-star3.github.io/MeiTuan007/data/goods.json')
-export const getHomeDetailCommentRequest = () =>
-    axios.get('https://www.fastmock.site/mock/0a7dd8897c829f1675e2e5962a305383/MeiTuan/assess')
-export const getHomeDetailSellerRequest = () =>
-    axios.get('https://www.fastmock.site/mock/0a7dd8897c829f1675e2e5962a305383/MeiTuan/seller')
-export const getKeywordsRequest =
-    axios.get('https://www.fastmock.site/mock/fc09142a9029fcb292822d4ee872f52b/beers/restaurants')
+export const getCitiesRequest = () => http.get(resolveUrl('cities'))
+export const getBannersRequest = () => http.get(resolveUrl('banners'))
+export const getRestaurantsRequest = () => http.get(resolveUrl('restaurants'))
+export const getHomeDetailOrderRequest = () => http.get(resolveUrl('goods'))
+export const getHomeDetailCommentRequest = () => http.get(resolveUrl('ratings'))
+export const getHomeDetailSellerRequest = () => http.get(resolveUrl('seller'))

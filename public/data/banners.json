@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "美食"
+  },
+  {
+    "id": 2,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "超市便利"
+  },
+  {
+    "id": 3,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "蔬菜水果"
+  },
+  {
+    "id": 4,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "甜点饮品"
+  },
+  {
+    "id": 5,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "医药健康"
+  },
+  {
+    "id": 6,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "鲜花绿植"
+  },
+  {
+    "id": 7,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "跑腿代购"
+  },
+  {
+    "id": 8,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "夜宵"
+  },
+  {
+    "id": 9,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "早餐"
+  },
+  {
+    "id": 10,
+    "image_src": "https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
+    "desc": "汉堡炸鸡"
+  }
+]
