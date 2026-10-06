@@ -105,10 +105,10 @@
 - [x] ✅ mock 数据脱离 fastmock：`public/data/` 补全 `cities.json`、`banners.json`；删除重复的 `src/assets/data/`
 - [x] ✅ 环境变量：`.env.development` / `.env.production` / `.env.example`，`vite-env.d.ts` 里有类型声明
 - [x] ✅ ESLint（flat config + typescript-eslint + react-hooks）+ Prettier，脚本 `lint` / `format`
-- [ ] 🧑 Ever：把页面里的 `props`、`useState`、事件参数补上类型，改用 `@/api` 的 `fetchXxx`（旧 `request.ts` 不再被引用后即可删）
-- [ ] 🧑 Ever：删除 tsconfig 里的 `"noImplicitAny": false`，清零 `npm run typecheck`
-- [ ] 🧑 Ever：清零 `npm run lint` 的 error（`prefer-const`、`no-unused-vars` 可 `eslint --fix` 部分自动修）
-- [ ] 🧑 Ever：`Login` / `Register` 改用 `@/api` 的 `login` / `register`，并补响应类型
+- [x] 🧑 Ever：把页面里的 `props`、`useState`、事件参数补上类型，改用 `@/api` 的 `fetchXxx`（旧 `request.ts` 不再被引用后即可删）
+- [x] 🧑 Ever：删除 tsconfig 里的 `"noImplicitAny": false`，清零 `npm run typecheck`
+- [x] 🧑 Ever：清零 `npm run lint` 的 error（`prefer-const`、`no-unused-vars` 可 `eslint --fix` 部分自动修）
+- [x] 🧑 Ever：`Login` / `Register` 改用 `@/api` 的 `login` / `register`，并补响应类型
 - 验收：`npm run typecheck` 0 错误，`npm run lint` 0 error
 
 **阶段 3 架子的决策记录**
@@ -128,11 +128,11 @@
 ### 阶段 5：Redux → Jotai（5~6h，**核心**）
 详见第 4 节的 atom 设计。迁移顺序（风险由低到高）：
 
-1. [ ] 安装 `jotai`（+ `jotai/utils`），`main.tsx` 加 `<Provider>` 可选（默认 store 也行，学习阶段建议显式用 `createStore` 做一次对比）
+1. [ ] 安装 `jotai`（`jotai/utils` 随包自带；按需另装 `jotai-family`，见 4.1 的 API 说明），`main.tsx` 加 `<Provider>` 可选（默认 store 也行，学习阶段建议显式用 `createStore` 做一次对比）
 2. [ ] `search` 模块（仅一个 `enterLoading` 布尔）→ 第一个原始 atom
 3. [ ] `cities` → 异步只读 atom
-4. [ ] `home`（banners + restaurants + loading）→ 异步 atom + `loadable`/`unwrap`
-5. [ ] `comment`、`business`（HomeDetail 二级页）→ 同上，加 `atomFamily`（按商家 id）
+4. [ ] `home`（banners + restaurants + loading）→ 异步 atom + `unwrap`（Jotai 3 没有 `loadable`）
+5. [ ] `comment`、`business`（HomeDetail 二级页）→ 同上，加 `atomFamily`（按商家 id；Jotai 3 里来自独立包 `jotai-family`）
 6. [ ] `goods`（HomeOrder 购物车）→ **重写**：派生 atom + `atomWithStorage` 持久化，顺手修掉 mutate bug
 7. [ ] 登录态 → `atomWithStorage`（cookie 兼容层或直接迁 localStorage）
 8. [ ] 删除 `src/store/`、各 `pages/*/store/`，卸载 `redux`、`react-redux`、`redux-thunk`、`redux-persist`、`@reduxjs/toolkit`
@@ -167,14 +167,24 @@
 | 只读派生 atom `atom(get => ...)` | 购物车总价、总件数、每个分类的角标数 | 5.6 |
 | 可写派生 atom `atom(get, set)` | `addToCartAtom` / `reduceFromCartAtom` / `clearCartAtom`（取代 reducer 的 action） | 5.6 |
 | 异步 atom（`atom(async () => ...)`）+ `Suspense` | cities、banners、restaurants | 5.3~5.4 |
-| `loadable` / `unwrap` | 首页要显示 loading 骨架而不是整页 Suspense | 5.4 |
-| `atomFamily` | 按商家 `id` 缓存评价/商家详情 | 5.5 |
+| `unwrap`（取代旧版 `loadable`） | 首页要显示 loading 骨架而不是整页 Suspense：`unwrap(asyncAtom, () => [])` 在 pending 时返回兜底值 | 5.4 |
+| `atomFamily`（独立包 `jotai-family`） | 按商家 `id` 缓存评价/商家详情 | 5.5 |
 | `atomWithStorage` | 购物车持久化（取代 redux-persist）、登录态 | 5.6~5.7 |
 | `atomWithReset` / `RESET` | 清空购物车 | 5.6 |
 | `selectAtom` / `splitAtom` | 商品列表按条目拆分，减少重渲染 | 5.6 进阶 |
 | `createStore` / `Provider` / 在 React 外读写 | axios 拦截器读 token（`store.get(tokenAtom)`） | 5.7 / 3 |
 | `jotai-devtools` | 调试 atom 变化 | 全程 |
 | `jotai-tanstack-query`（可选） | 用 `atomWithQuery` 重写 restaurants，对比手写异步 atom | 进阶 |
+
+> **Jotai 3 API 核对（2026-10-06，本机 `jotai@3.0.1` 实际导出）**
+> - `jotai`：`atom`、`useAtom`、`useAtomValue`、`useSetAtom`、`useStore`、`Provider`、`createStore`、`getDefaultStore`
+> - `jotai/utils`：`atomWithStorage`、`createJSONStorage`、`atomWithReset` / `RESET` / `useResetAtom`、`atomWithDefault`、`atomWithLazy`、`atomWithRefresh`、`atomWithObservable`、`atomWithReducer`、`selectAtom`、`splitAtom`、`unwrap`、`useAtomCallback`、`useHydrateAtoms`、`freezeAtom`
+> - **没有** `loadable`：要 loading 状态用 `unwrap(atom, fallback)`，或用 `<Suspense>`。
+> - **没有** `atomFamily`：它在独立包 `jotai-family`（`npm i jotai-family`，写法 `import { atomFamily } from 'jotai-family'`）。
+> - `atomWithStorage` 的 `getOnInit` 选项仍存在。
+> - 其他旧教程里的 API 以本机 `node_modules/jotai/dist/**/*.d.ts` 为准，不要凭记忆写。
+>
+> **易错点：atom 必须定义在模块顶层。** 在函数（包括名字叫 `useXxx` 的函数）里 `atom(...)`，每次调用都会新建一个 atom，多个组件拿到的是互不相干的状态。组件里只通过 `useAtom` / `useAtomValue` / `useSetAtom` 读写模块里导出的 atom。
 
 ### 4.2 目录约定
 
@@ -184,7 +194,7 @@ src/
 │   ├── auth.ts        # tokenAtom（atomWithStorage）、isLoggedInAtom
 │   ├── cities.ts      # citiesAtom（异步）
 │   ├── home.ts        # bannersAtom、restaurantsAtom
-│   ├── business.ts    # businessFamily(id)
+│   ├── business.ts    # businessFamily(id)（atomFamily，来自 jotai-family）
 │   ├── comment.ts     # commentFamily(id)、commentFilterAtom
 │   ├── cart.ts        # ★ 购物车（见下）
 │   └── index.ts
