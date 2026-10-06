@@ -130,7 +130,7 @@
   - `useSticky(ref)`（吸顶）、`useTimeTheme()`（按时间变背景）、`useScrollTop()`、`useInView`（`IntersectionObserver` 图片懒加载）
 - [ ] `Home` 里的 `document.querySelector('.w').classList...` 全部改为 state 驱动
 - [ ] `Scroll`（better-scroll 封装）：保留，用 `useEffect` 清理 `destroy()`，补类型
-- [ ] `SetMeal`：Swiper 4 命令式 → `swiper/react`
+- [x] `SetMeal`：Swiper 4 命令式 → `swiper/react`（提前在阶段 2 后完成，随 swiper 升到 14）
 - [ ] `Search` 的 `react-transition-group` 保留或换 CSS 过渡
 - [ ] Login 表单改用 `useActionState`（React 19 Actions）+ 真正等待接口返回
 - [ ] 写 `utils/storage` 对应 TS 版本；常量 `Cookie.Token: 'dptoken'` 与实际 `'usertoken'` 不一致，统一

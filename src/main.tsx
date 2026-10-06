@@ -6,7 +6,6 @@ import { HashRouter, BrowserRouter } from 'react-router'
 import '@/styles/reset.css'
 // 引入字体图标
 import 'font-awesome/css/font-awesome.min.css'
-import 'swiper/dist/css/swiper.min.css'
 // 使用redux
 import { Provider } from 'react-redux'
 import store from './store'

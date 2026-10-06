@@ -1,58 +1,33 @@
-import { useEffect, memo } from 'react'
+import { memo } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import { Wrapper } from './style'
-import Swiper from 'swiper'
 
- function SetMeal() {
-    useEffect(() => {
-        // 轮播图挂载
-        new Swiper('.home_info_banners', {
-            loop: true,
-            autoplay: {
-                delay: 3000
-            },
-            // 如果需要分页器
-            pagination: {
-                el: '.swiper-pagination',
-            },
+// 轮播图片（后续可迁移到 public/data 或接口）
+const SLIDES = [
+    'https://p0.meituan.net/wmbanner/0acea4ba5704d56f13d78ad175b2cc5538158.png@602w',
+    'https://p0.meituan.net/wmbanner/c07382bf400d74f81fe7768fcde6897684199.jpg@602w',
+    'https://p0.meituan.net/wmbanner/cad13591ad0eb89515bad8cc394739d5124198.jpg@602w',
+]
 
-            // 如果需要前进后退按钮
-            // navigation: {
-            //     nextEl: '.swiper-button-next',
-            //     prevEl: '.swiper-button-prev',
-            // },
-        
-            // 如果需要滚动条
-            // scrollbar:{
-            //     el:'.swiper-scrollbar'
-            // }
-        })
-    }, [])
+function SetMeal() {
     return (
         <Wrapper>
-            <div className="home_info_banners swiper-container">
-                <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                        <img src="https://p0.meituan.net/wmbanner/0acea4ba5704d56f13d78ad175b2cc5538158.png@602w" alt="" />
-                    </div>
-                    <div className="swiper-slide">
-                        <img src="https://p0.meituan.net/wmbanner/c07382bf400d74f81fe7768fcde6897684199.jpg@602w" alt="" />
-                    </div>
-                    <div className="swiper-slide">
-                        <img src="https://p0.meituan.net/wmbanner/cad13591ad0eb89515bad8cc394739d5124198.jpg@602w" alt="" />
-
-                    </div>
-                </div>
-                {/* <!-- 如果需要分页器 --> */}
-                <div className="swiper-pagination"></div>
-
-                {/* <!-- 如果需要导航按钮 --> */}
-                {/* <div className="swiper-button-prev"></div>
-                <div className="swiper-button-next"></div> */}
-
-                {/* <!-- 如果需要滚动条 --> */}
-                {/* <div className="swiper-scrollbar"></div> */}
-            </div>
-
+            <Swiper
+                className="home_info_banners"
+                modules={[Autoplay, Pagination]}
+                loop
+                autoplay={{ delay: 3000 }}
+                pagination={{ clickable: true }}
+            >
+                {SLIDES.map((src) => (
+                    <SwiperSlide key={src}>
+                        <img src={src} alt="" />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </Wrapper>
     )
 }
