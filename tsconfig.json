@@ -6,8 +6,6 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
-    // TODO(ts): 阶段 3 补全类型后删除这一行，恢复严格模式
-    "noImplicitAny": false,
     "noEmit": true,
     "skipLibCheck": true,
     "isolatedModules": true,

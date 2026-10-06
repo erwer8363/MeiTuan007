@@ -1,16 +1,18 @@
 /**
  * 接口地址表：每个接口同时声明「mock 静态文件」和「真实后端路径」。
  * 由 VITE_USE_MOCK 决定实际使用哪个，业务代码只关心 key。
+ * 真实路径统一以 /api 开头，这样 vite dev 代理（见 vite.config.ts 的 server.proxy）才会转发到后端。
  */
 const endpoints = {
-  cities: { mock: 'data/cities.json', real: '/cities' },
-  banners: { mock: 'data/banners.json', real: '/banners' },
-  restaurants: { mock: 'data/restaurants.json', real: '/restaurants' },
-  goods: { mock: 'data/goods.json', real: '/goods' },
-  ratings: { mock: 'data/ratings.json', real: '/ratings' },
-  seller: { mock: 'data/seller.json', real: '/seller' },
+  cities: { mock: 'data/cities.json', real: '/api/cities' },
+  banners: { mock: 'data/banners.json', real: '/api/banners' },
+  restaurants: { mock: 'data/restaurants.json', real: '/api/restaurants' },
+  goods: { mock: 'data/goods.json', real: '/api/goods' },
+  ratings: { mock: 'data/ratings.json', real: '/api/ratings' },
+  seller: { mock: 'data/seller.json', real: '/api/seller' },
   login: { mock: '', real: '/api/users/login' },
   register: { mock: '', real: '/api/users/register' },
+  keyword: { mock: 'data/keywords.json', real: '/api/keywords' },
 } as const
 
 export type EndpointKey = keyof typeof endpoints
