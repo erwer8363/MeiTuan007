@@ -1,5 +1,7 @@
-[
-    {
+{
+  "data": {
+    "list": [
+      {
         "id":1,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -17,9 +19,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":2,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -37,9 +39,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":3,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -57,9 +59,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":4,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -77,10 +79,10 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
+        "desc3":"50减28"
+      },
 
-    {
+      {
         "id":5,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -98,9 +100,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":6,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -118,9 +120,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":7,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -138,10 +140,10 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
+        "desc3":"50减28"
+      },
 
-     {
+      {
         "id":8,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -159,9 +161,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-     {
+        "desc3":"50减28"
+      },
+      {
         "id":9,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -179,9 +181,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":10,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -199,9 +201,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-     {
+        "desc3":"50减28"
+      },
+      {
         "id":11,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -219,8 +221,8 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    }, {
+        "desc3":"50减28"
+      }, {
         "id":12,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -238,9 +240,9 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    },
-    {
+        "desc3":"50减28"
+      },
+      {
         "id":13,
         "name":"华莱士·全鸡汉堡（金牛店）",
         "pic":"https://p0.meituan.net/waimaipoi/f3e3996d671b51f4314e92c62d99149f96647.png",
@@ -258,8 +260,12 @@
         "info_text2":"已收藏",
         "desc1":"已测体温",
         "desc2":"32减20",
-        "desc3":"50减28"           
-    }
+        "desc3":"50减28"
+      }
 
-   
-]
+
+    ]
+  },
+  "code": 0,
+  "msg": "success"
+}
