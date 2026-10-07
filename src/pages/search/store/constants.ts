@@ -1,2 +1,0 @@
-export const SET_KEYWORDS = 'SET_HOT_KEYWORDS'
-export const SET_ENTER_LOADING = 'SET_ENTER_LOADING'

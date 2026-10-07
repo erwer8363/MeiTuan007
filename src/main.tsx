@@ -1,24 +1,16 @@
 import ReactDOM from 'react-dom/client'
 import { initRem } from '@/utils/rem'
 import App from './App'
-import { HashRouter, BrowserRouter } from 'react-router'
+import { BrowserRouter } from 'react-router'
 // 引入初始化css样式文件
 import '@/styles/reset.css'
 // 引入字体图标
 import 'font-awesome/css/font-awesome.min.css'
-// 使用redux
-import { Provider } from 'react-redux'
-import store from './store'
-import { PersistGate } from 'redux-persist/lib/integration/react'
 
 initRem()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={store.store}>
-    <BrowserRouter>
-      <PersistGate loading={null} persistor={store.persistor}>
-        <App />
-      </PersistGate>
-    </BrowserRouter>
-  </Provider>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
 )
