@@ -16,19 +16,19 @@ function Home() {
   const [visible, setVisible] = useState(false)
   const [search] = useSearchParams()
   const cityName = search.get('name') || ''
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     isFixed('.container', 1)
     backGroundColor('.container')
-    document.querySelector('.w').classList.add('failScroll')
+    document.querySelector('.w')?.classList.add('failScroll')
   }, [])
 
   const onModalClose = () => {
     // 将自有的 visible 变为false 为了触发下次点击事件
     setVisible(false)
-    document.querySelector('.kk-filter-wrapper').classList.remove('fixed')
-    containerRef.current.classList.remove('fixed')
+    document.querySelector('.kk-filter-wrapper')?.classList.remove('fixed')
+    containerRef.current?.classList.remove('fixed')
   }
 
   return (
