@@ -10,11 +10,13 @@ export const commentsErrorAtom = atom<Error | null>(null)
 
 let reqId = 0
 
-export const loadCommentsAndNavsAtom = atom(null, async (_get, set) => {
+/** force=true 强制重新请求（如点击重试）；否则已有数据时直接复用，切 Tab 回来不再 loading */
+export const loadCommentsAndNavsAtom = atom(null, async (get, set, force?: boolean) => {
+  if (!force && get(commentsAtom).length > 0) return
   const id = ++reqId
   set(loadingAtom, true)
   set(commentsErrorAtom, null)
-  // 清空旧数据，避免再次进入页面时闪出上一次的评论
+  // 重新请求前清空旧数据，避免失败后还显示过期评论
   set(commentsAtom, [])
   set(navsAtom, [])
   try {

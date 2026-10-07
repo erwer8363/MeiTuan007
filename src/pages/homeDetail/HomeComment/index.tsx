@@ -78,7 +78,7 @@ const HomeComment: FC = () => {
       </div>
       {error && !loading ? (
         <ErrorBlock status="default" title="评论加载失败" description={error.message}>
-          <Button size="small" color="primary" onClick={() => getCommentsAndNavList()}>
+          <Button size="small" color="primary" onClick={() => getCommentsAndNavList(true)}>
             重试
           </Button>
         </ErrorBlock>
