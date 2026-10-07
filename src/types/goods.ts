@@ -26,6 +26,11 @@ export interface Spu {
   // TODO(ts): 按需补充 rating、status、tread_num 等字段
 }
 
+/** 购物车里的商品：商品信息 + 加购数量 */
+export interface CartItem extends Spu {
+  count: number
+}
+
 /** 商品分类（左侧菜单一项 + 右侧一组商品） */
 export interface GoodsCategory {
   name: string

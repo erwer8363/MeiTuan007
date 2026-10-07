@@ -1,80 +1,58 @@
-import { useState, useEffect, memo } from 'react'
-import classnames from 'classnames'
+import { FC, MouseEvent, memo, useEffect, useState } from 'react'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { Button, ErrorBlock } from 'antd-mobile'
 import styles from './index.module.scss'
-import { getGoodsList, changeGoodsNumAction, changeGoodsAllNumAction } from './store/actionCreators'
-import { connect } from 'react-redux'
+import classnames from 'classnames'
+import {
+  cartAtom,
+  cartListAtom,
+  cartNumberAtom,
+  changeGoodsNumAtom,
+  clearCartAtom,
+  goodsAtom,
+  loadGoodsAtom,
+  loadingGoodsAtom,
+  loadingGoodsErrorAtom,
+} from '@/atoms/homeDetailStore'
 // 组件
-import Scroll from '@/components/common/Scroll'
 import ShoppingCart from '@/components/ShoppingCart'
-// 图片延迟加载
-// import LazyLoad, { forceCheck } from 'react-lazyload'
 import Loading from '@/components/common/loading'
 
-function HomeOrder(props) {
-  const { goods: details, loading, price, singleCart } = props
-  // console.log(singleCart);
-  const { getGoodsListDispatch, changeGoodsNumDispatch, changeGoodsAllNumDispatch } = props
-
-  // console.log(details);
+const HomeOrder: FC = () => {
+  const goods = useAtomValue(goodsAtom)
+  const cart = useAtomValue(cartAtom)
+  const cartList = useAtomValue(cartListAtom)
+  const cartNumber = useAtomValue(cartNumberAtom)
+  const loading = useAtomValue(loadingGoodsAtom)
+  const error = useAtomValue(loadingGoodsErrorAtom)
+  const loadGoods = useSetAtom(loadGoodsAtom)
+  const changeGoodsNum = useSetAtom(changeGoodsNumAtom)
+  const clearCart = useSetAtom(clearCartAtom)
 
   // 当前选中的左侧分类
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   useEffect(() => {
-    getGoodsListDispatch()
-  }, [])
+    loadGoods()
+  }, [loadGoods])
 
   // 商品数量加减
-  const changeGoodNum = (e, status, id) => {
+  const changeGoodNum = (e: MouseEvent, status: 'add' | 'reduce', id: number) => {
     e.preventDefault()
     e.stopPropagation()
-    let data = {
-      status: status,
-      id: id,
-    }
-    changeGoodsNumDispatch(data)
+    changeGoodsNum({ id, status })
   }
-  // 点击 获取右侧商品的id 然后scrollIntoView事件方法滚动到对应位置
-  const scrollToAnchorLeft = (anchorName) => {
-    if (anchorName) {
-      let anchorElement = document.getElementById(anchorName)
-      // console.log(anchorElement.scrollTop);
-      // console.log(anchorElement);
-      anchorElement &&
-        anchorElement.scrollIntoView({
-          block: 'start',
-          behavior: 'smooth',
-        })
-    }
-    return true
-  }
-  const cartNumber = () => {
-    let num = 0
-    details.map((item) => {
-      if (item.name != '热销') {
-        item.spus.map((ele) => {
-          num += ele.praise_num
-        })
-      } else {
-        item.spus.map((ele) => {
-          if (ele.name == '麦乐鸡5块') {
-            num += ele.praise_num
-          }
-        })
-      }
+  // 点击左侧分类，滚动到右侧对应分类
+  const scrollToAnchorLeft = (anchorName: string) => {
+    document.getElementById(anchorName)?.scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
     })
-    return num
-  }
-  const clearCart = () => {
-    changeGoodsAllNumDispatch()
   }
 
   const sideBarList = () => {
-    return details.map((item, index) => {
-      let num = 0
-      item.spus.map((ele) => {
-        num += ele.praise_num
-      })
+    return goods.map((item, index) => {
+      const num = item.spus.reduce((sum, spu) => sum + (cart[spu.id] ?? 0), 0)
 
       return (
         <div
@@ -97,13 +75,14 @@ function HomeOrder(props) {
     })
   }
   const goodsContent = () => {
-    return details.map((item, index) => {
+    return goods.map((category, index) => {
       return (
-        <div className={styles.foodList} key={index} id={item.name}>
-          <h3 className={styles.title}>{item.name}</h3>
+        <div className={styles.foodList} key={index} id={category.name}>
+          <h3 className={styles.title}>{category.name}</h3>
           {/* <!-- 具体的商品列表 --> */}
           <ul>
-            {item.spus.map((item) => {
+            {category.spus.map((item) => {
+              const count = cart[item.id] ?? 0
               return (
                 <li className={styles.foodItem} key={item.id}>
                   <div className={styles.icon}>
@@ -122,7 +101,7 @@ function HomeOrder(props) {
                         <span className={styles.unit}>/{item.unit}</span>
                       </div>
                       <div className={styles.priceRight}>
-                        {item.praise_num > 0 && (
+                        {count > 0 && (
                           <span className={styles.priceRightReduce}>
                             <span
                               className={styles.reduceBox}
@@ -130,9 +109,7 @@ function HomeOrder(props) {
                             ></span>
                           </span>
                         )}
-                        <span className={styles.priceRightNum}>
-                          {item.praise_num ? item.praise_num : ''}
-                        </span>
+                        <span className={styles.priceRightNum}>{count || ''}</span>
                         <span className={styles.priceRightAdd}>
                           <span
                             className={styles.addBox}
@@ -159,15 +136,17 @@ function HomeOrder(props) {
         </div>
         {/* <!--商品列表--> */}
         <div className={styles.foodsWrapper}>
+          {error && !loading ? (
+            <ErrorBlock status="default" title="商品加载失败" description={error.message}>
+              <Button size="small" color="primary" onClick={() => loadGoods(true)}>
+                重试
+              </Button>
+            </ErrorBlock>
+          ) : null}
           <ul className={styles.foodContainer}>{goodsContent()}</ul>
         </div>
       </div>
-      <ShoppingCart
-        price={price}
-        cartNumber={cartNumber}
-        clearCart={clearCart}
-        singleCart={singleCart}
-      />
+      <ShoppingCart list={cartList} cartNumber={cartNumber} clearCart={clearCart} />
       {loading ? (
         <div className={styles.enterLoading}>
           <Loading></Loading>
@@ -177,36 +156,4 @@ function HomeOrder(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  let arr = []
-  state.goods.GoodsList.forEach((item) => {
-    if (item.name != '热销') {
-      item.spus.forEach((item) => {
-        let price = 0
-        price += item.praise_num > 0 ? item.min_price * item.praise_num : 0
-        arr.push(price)
-      })
-    }
-  })
-
-  return {
-    goods: state.goods.GoodsList,
-    loading: state.goods.Loading,
-    singleCart: state.goods.SingleCart,
-    price: arr.reduce((pre, curr) => (pre += curr), 0),
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getGoodsListDispatch() {
-      dispatch(getGoodsList())
-    },
-    changeGoodsNumDispatch(data) {
-      dispatch(changeGoodsNumAction(data))
-    },
-    changeGoodsAllNumDispatch(data) {
-      dispatch(changeGoodsAllNumAction(data))
-    },
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(memo(HomeOrder))
+export default memo(HomeOrder)

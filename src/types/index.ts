@@ -1,7 +1,7 @@
 export type { ApiResponse } from './common'
 export type { Banner } from './banner'
 export type { City } from './city'
-export type { GoodsCategory, GoodsData, Spu, SpuComment } from './goods'
+export type { CartItem, GoodsCategory, GoodsData, Spu, SpuComment } from './goods'
 export type { RatingComment, RatingData, RatingLabel } from './rating'
 export type { Restaurant } from './restaurant'
 export type { Seller } from './seller'

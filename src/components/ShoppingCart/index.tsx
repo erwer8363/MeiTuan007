@@ -2,26 +2,19 @@ import { useState, useEffect, memo } from 'react'
 import { Link } from 'react-router'
 import { Wrapper } from './style'
 import classnames from 'classnames'
+import type { CartItem } from '@/types'
 
-function ShoppingCart(props) {
-  const { cartNumber, clearCart, singleCart } = props
+interface ShoppingCartProps {
+  /** 已按 id 去重、带数量的购物车商品 */
+  list: CartItem[]
+  /** 购物车商品总件数 */
+  cartNumber: number
+  clearCart: () => void
+}
+
+function ShoppingCart({ list, cartNumber, clearCart }: ShoppingCartProps) {
   const [visible, setVisible] = useState(false)
-  let list = []
-  let arr = []
-  singleCart.forEach((item, index) => {
-    if (index % 2 == 0) {
-      list.push(item)
-    }
-  })
-  for (let i = 0; i < list.length; i++) {
-    if (arr.includes(list[i].id)) {
-      list.splice(i, 1)
-      i--
-    } else {
-      arr.push(list[i].id)
-    }
-  }
-  let price = list.reduce((pre, curr) => pre + curr.praise_num * curr.min_price, 0)
+  const price = list.reduce((pre, curr) => pre + curr.count * curr.min_price, 0)
   //    list =[] && window.sessionStorage.getItem("list") ? list = window.sessionStorage.getItem("list") : (window.sessionStorage.list = [...list])
 
   const cartVisible = () => {
@@ -31,8 +24,8 @@ function ShoppingCart(props) {
   const clear = () => {
     clearCart()
     cartVisible()
-    document.querySelector('.cart-content-btn').classList.remove('cart-bg')
-    document.querySelector('.cart-content-ft').classList.remove('cart-bg-ft')
+    document.querySelector('.cart-content-btn')?.classList.remove('cart-bg')
+    document.querySelector('.cart-content-ft')?.classList.remove('cart-bg-ft')
   }
   return (
     <Wrapper>
@@ -78,10 +71,10 @@ function ShoppingCart(props) {
                                 <div className="cartDetail-content-bd">
                                   <span className="cartDetail-content-icon">¥</span>
                                   <span className="cartDetail-content-price">
-                                    {item.min_price * item.praise_num}
+                                    {item.min_price * item.count}
                                   </span>
                                   <span className="cartDetail-content-discount">
-                                    ¥{45 * item.praise_num}
+                                    ¥{45 * item.count}
                                   </span>
                                 </div>
                               </div>
@@ -90,7 +83,7 @@ function ShoppingCart(props) {
                                   <span className="cartDetail-content-ftbox">
                                     <span className="cartDetail-content-ftboxv2"></span>
                                   </span>
-                                  <span className="cartDetail-ft-count">{item.praise_num}</span>
+                                  <span className="cartDetail-ft-count">{item.count}</span>
                                   <span className="cartDetail-ft-box">
                                     <span className="cartDetail-content-ftboxv2"></span>
                                   </span>
@@ -124,7 +117,7 @@ function ShoppingCart(props) {
             onClick={() => cartVisible()}
           >
             {list.length > 0 && (
-              <div className="cart-content-icon cart-content-iconv2">{cartNumber()}</div>
+              <div className="cart-content-icon cart-content-iconv2">{cartNumber}</div>
             )}
           </div>
 
