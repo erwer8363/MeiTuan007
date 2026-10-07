@@ -1,0 +1,146 @@
+$img: '../../../assets/images/seller';
+
+.seller {
+  position: absolute;
+  left: 0;
+  top: 13.2rem;
+  bottom: 0;
+  width: 100%;
+  background: #f4f4f4;
+  overflow: hidden;
+
+  .sellerWrapper {
+    background: white;
+  }
+
+  .sellerView {
+    padding-left: 0.681rem;
+
+    .addressWrapper {
+      display: flex;
+      padding: 0.727rem 0;
+      border-bottom: 0.09rem solid #f4f4f4;
+
+      .addressLeft {
+        flex: 1;
+        padding-left: 1.2rem;
+        padding-right: 1.41rem;
+        background: url('#{$img}/address.png') no-repeat left center;
+        background-size: 0.636rem 0.727rem;
+        font-size: 0.636rem;
+        line-height: 0.86rem;
+      }
+
+      .addressRight {
+        flex: 0 0 60px;
+        background: url('#{$img}/line.png') no-repeat left center;
+        background-size: 0.09rem 0.681rem;
+
+        .content {
+          width: 100%;
+          height: 100%;
+          background: url('#{$img}/phone.png') no-repeat center center;
+          background-size: 0.81rem 0.81rem;
+        }
+      }
+    }
+
+    .picsWrapper {
+      padding: 0.454rem 0;
+      overflow-x: auto;
+      border-bottom: 0.09rem solid #f4f4f4;
+      white-space: nowrap;
+
+      .picsItem {
+        display: inline-block;
+        margin-right: 0.5rem;
+        width: 4.22rem;
+        height: 3.4rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.07rem;
+        }
+      }
+    }
+
+    .safetyWrapper {
+      padding: 0.681rem 0.636rem 0.681rem 1.136rem;
+      background: url('#{$img}/safety.png') no-repeat left center;
+      background-size: 0.636rem 0.727rem;
+      font-size: 0.636rem;
+
+      span {
+        float: right;
+        font-size: 0.636rem;
+      }
+    }
+  }
+
+  .tipWrapper {
+    padding-left: 0.681rem;
+
+    .deliveryWrapper {
+      padding: 0.681rem 0 0.681rem 1.136rem;
+      background: url('#{$img}/delivery.png') no-repeat left center;
+      background-size: 0.636rem 0.727rem;
+      font-size: 0.636rem;
+      border-bottom: 0.09rem solid #f4f4f4;
+    }
+
+    .shippingWrapper {
+      padding: 0.681rem 0.77rem 0.681rem 1.136rem;
+      background: url('#{$img}/time.png') no-repeat left center;
+      background-size: 0.681rem 0.681rem;
+      font-size: 0.636rem;
+      line-height: 0.81rem;
+    }
+  }
+
+  .otherWrapper {
+    padding-left: 0.681rem;
+
+    .serverWrapper {
+      padding: 0.681rem 0 0.77rem 1.136rem;
+      background: url('#{$img}/server.png') no-repeat left center;
+      background-size: 0.681rem 0.681rem;
+      font-size: 0.636rem;
+      border-bottom: 0.09rem solid #f4f4f4;
+
+      .poiServer {
+        display: inline-block;
+        margin-left: 0.77rem;
+
+        img {
+          width: 0.681rem;
+          height: 0.681rem;
+          margin-right: 6px;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .discountsWrapper {
+      padding: 0.77rem 24px 0.86rem 0;
+
+      .discountsItem {
+        display: flex;
+
+        .icon {
+          flex: 0 0 1.136rem;
+
+          img {
+            width: 0.681rem;
+            height: 0.681rem;
+          }
+        }
+
+        .text {
+          flex: 1;
+          font-size: 0.636rem;
+        }
+      }
+    }
+  }
+}

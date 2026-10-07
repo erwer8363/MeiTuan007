@@ -6,4 +6,3 @@ import { http } from './http'
 import { resolveUrl } from './endpoints'
 
 export const getHomeDetailOrderRequest = () => http.get(resolveUrl('goods'))
-export const getHomeDetailSellerRequest = () => http.get(resolveUrl('seller'))

@@ -1,2 +1,0 @@
-export const GET_BUSINESS_LIST = 'GET_BUSINESS_LIST '
-export const GET_LOADING = 'GET_LOADING '

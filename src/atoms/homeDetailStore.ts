@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
-import { RatingComment, RatingLabel } from '@/types'
-import { fetchRatings } from '@/api'
+import { RatingComment, RatingLabel, Seller } from '@/types'
+import { fetchRatings, fetchSeller } from '@/api'
 
 // homeComment
 export const commentsAtom = atom<RatingComment[]>([])
@@ -35,5 +35,25 @@ export const loadCommentsAndNavsAtom = atom(null, async (get, set, force?: boole
 })
 
 // homeBusiness
+export const businessAtom = atom<Seller | null>(null)
+export const loadingBusinessAtom = atom(true)
+export const loadingBusinessErrorAtom = atom<Error | null>(null)
 
+let businessReqId = 0
+
+export const loadBusinessAtom = atom(null, async (_get, set) => {
+  const id = ++businessReqId
+  set(loadingBusinessAtom, true)
+  set(loadingBusinessErrorAtom, null)
+  try {
+    const { data } = await fetchSeller()
+    if (id !== businessReqId) return
+    set(businessAtom, data)
+  } catch (e) {
+    if (id !== businessReqId) return
+    set(loadingBusinessErrorAtom, e instanceof Error ? e : new Error(String(e)))
+  } finally {
+    if (id === businessReqId) set(loadingBusinessAtom, false)
+  }
+})
 // homeOrder
