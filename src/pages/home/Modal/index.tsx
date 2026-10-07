@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import styles from './index.module.scss'
 
 interface ModalProps {
@@ -19,7 +19,7 @@ const SORT_OPTIONS = [
   '人均低到高',
 ]
 
-function Modal({ visible, onClose }: ModalProps) {
+const Modal: FC<ModalProps> = ({ visible, onClose }) => {
   // 显示状态完全由父组件控制：点遮罩只通知父组件 onClose，由父组件把 visible 置为 false
   if (!visible) return null
 

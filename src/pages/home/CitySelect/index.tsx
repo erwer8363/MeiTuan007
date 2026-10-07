@@ -16,11 +16,13 @@ const CitySelect = (props: IProps) => {
   }, [])
 
   return (
-    <Link className={styles.citygps} to="/cities">
-      <i className={styles.iconCity}></i>
-      <span>{cityName ? cityName : '获取城市坐标'}</span>
-      <i className={styles.iconCityNext}></i>
-    </Link>
+    <div className={styles.wrapper}>
+      <Link className={styles.citygps} to="/cities">
+        <i className={styles.iconCity}></i>
+        <span>{cityName ? cityName : '获取城市坐标'}</span>
+        <i className={styles.iconCityNext}></i>
+      </Link>
+    </div>
   )
 }
 export default memo(CitySelect)
