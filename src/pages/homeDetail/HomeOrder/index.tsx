@@ -1,8 +1,8 @@
 import { useState, useEffect, memo } from 'react'
-import { Wrapper, EnterLoading } from './style'
+import classnames from 'classnames'
+import styles from './index.module.scss'
 import { getGoodsList, changeGoodsNumAction, changeGoodsAllNumAction } from './store/actionCreators'
 import { connect } from 'react-redux'
-import { menuBgChange } from '@/utils'
 // 组件
 import Scroll from '@/components/common/Scroll'
 import ShoppingCart from '@/components/ShoppingCart'
@@ -16,6 +16,9 @@ function HomeOrder(props) {
   const { getGoodsListDispatch, changeGoodsNumDispatch, changeGoodsAllNumDispatch } = props
 
   // console.log(details);
+
+  // 当前选中的左侧分类
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   useEffect(() => {
     getGoodsListDispatch()
@@ -75,14 +78,17 @@ function HomeOrder(props) {
 
       return (
         <div
-          className="menu-item"
+          className={classnames(styles.menuItem, { [styles.siderbarBg]: activeIndex === index })}
           key={index}
-          onClick={(e) => {
-            scrollToAnchorLeft(item.name) && menuBgChange()
+          onClick={() => {
+            scrollToAnchorLeft(item.name)
+            setActiveIndex(index)
           }}
         >
-          <div className="text">
-            {num > 0 && <div className="menu-item-icon menu-item-iconv2">{num}</div>}
+          <div className={styles.text}>
+            {num > 0 && (
+              <div className={classnames(styles.menuItemIcon, styles.menuItemIconv2)}>{num}</div>
+            )}
             <img src={item.icon ? item.icon : ''} style={{ width: '15px' }} />
             {item.name}
           </div>
@@ -93,43 +99,43 @@ function HomeOrder(props) {
   const goodsContent = () => {
     return details.map((item, index) => {
       return (
-        <div className="food-list food-list-hook" key={index} id={item.name}>
-          <h3 className="title">{item.name}</h3>
+        <div className={styles.foodList} key={index} id={item.name}>
+          <h3 className={styles.title}>{item.name}</h3>
           {/* <!-- 具体的商品列表 --> */}
           <ul>
             {item.spus.map((item) => {
               return (
-                <li className="food-item" key={item.id}>
-                  <div className="icon">
+                <li className={styles.foodItem} key={item.id}>
+                  <div className={styles.icon}>
                     <img src={item.picture} alt="" />
                   </div>
-                  <div className="content">
-                    <h3 className="name">{item.name}</h3>
-                    <div className="desc">{item.description}</div>
-                    <div className="extra">
-                      <span className="saled">{item.month_saled_content}</span>
-                      <span className="praise">{item.praise_content}</span>
+                  <div className={styles.content}>
+                    <h3 className={styles.name}>{item.name}</h3>
+                    <div className={styles.desc}>{item.description}</div>
+                    <div className={styles.extra}>
+                      <span className={styles.saled}>{item.month_saled_content}</span>
+                      <span>{item.praise_content}</span>
                     </div>
-                    <div className="price">
+                    <div className={styles.price}>
                       <div>
-                        <span className="text">${item.min_price}</span>
-                        <span className="unit">/{item.unit}</span>
+                        <span className={styles.text}>${item.min_price}</span>
+                        <span className={styles.unit}>/{item.unit}</span>
                       </div>
-                      <div className="price-right">
+                      <div className={styles.priceRight}>
                         {item.praise_num > 0 && (
-                          <span className="price-right_reduce">
+                          <span className={styles.priceRightReduce}>
                             <span
-                              className="reduce-box"
+                              className={styles.reduceBox}
                               onClick={(e) => changeGoodNum(e, 'reduce', item.id)}
                             ></span>
                           </span>
                         )}
-                        <span className="price-right_num">
+                        <span className={styles.priceRightNum}>
                           {item.praise_num ? item.praise_num : ''}
                         </span>
-                        <span className="price-right_add">
+                        <span className={styles.priceRightAdd}>
                           <span
-                            className="add-box"
+                            className={styles.addBox}
                             onClick={(e) => changeGoodNum(e, 'add', item.id)}
                           ></span>
                         </span>
@@ -145,15 +151,15 @@ function HomeOrder(props) {
     })
   }
   return (
-    <Wrapper>
-      <div className="goods">
+    <>
+      <div className={styles.goods}>
         {/* 侧边栏 */}
-        <div className="menu-wrapper">
+        <div className={styles.menuWrapper}>
           <ul>{sideBarList()}</ul>
         </div>
         {/* <!--商品列表--> */}
-        <div className="foods-wrapper">
-          <ul className="food-container">{goodsContent()}</ul>
+        <div className={styles.foodsWrapper}>
+          <ul className={styles.foodContainer}>{goodsContent()}</ul>
         </div>
       </div>
       <ShoppingCart
@@ -163,11 +169,11 @@ function HomeOrder(props) {
         singleCart={singleCart}
       />
       {loading ? (
-        <EnterLoading>
+        <div className={styles.enterLoading}>
           <Loading></Loading>
-        </EnterLoading>
+        </div>
       ) : null}
-    </Wrapper>
+    </>
   )
 }
 

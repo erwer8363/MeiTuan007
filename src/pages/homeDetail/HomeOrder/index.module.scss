@@ -1,0 +1,206 @@
+.enterLoading {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.goods {
+  display: flex;
+  position: absolute;
+  top: 12.73rem;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+
+  .menuWrapper,
+  .foodsWrapper {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .menuWrapper {
+    flex: 0 0 3.86rem;
+    margin-top: 1rem;
+    background: #f4f4f4;
+
+    .menuItem {
+      position: relative;
+      padding: 0.72rem 1.05rem 0.68rem 0.45rem;
+      border-bottom: 1px solid #e4e4e4;
+      list-style-type: none;
+
+      // 当前选中的分类
+      &.siderbarBg {
+        background-color: #fff;
+      }
+
+      .text {
+        font-size: 0.6rem;
+        color: #333;
+        line-height: 0.77rem;
+        vertical-align: middle;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .foodsWrapper {
+    flex: 1;
+
+    .foodContainer {
+      margin: 1rem 0 2rem 0;
+    }
+
+    .foodList {
+      padding: 0.5rem;
+
+      .title {
+        height: 0.6rem;
+        padding-left: 0.58rem;
+        margin-bottom: 0.545rem;
+        font-size: 0.6rem;
+        background: url('../../../assets/images/btn_yellow_highlighted@2x.png') no-repeat left
+          center;
+        background-size: 2px 0.45rem;
+      }
+
+      .foodItem {
+        display: flex;
+        position: relative;
+        margin-bottom: 1.2rem;
+
+        .icon {
+          flex: 0 0 2.86rem;
+          height: 3.6rem;
+          margin-right: 0.5rem;
+          background-position: center;
+          background-size: 120% 100%;
+          background-repeat: no-repeat;
+
+          img {
+            width: 3rem;
+          }
+        }
+
+        .content {
+          flex: 1;
+
+          .name {
+            padding-right: 1.22rem;
+            margin-bottom: 0.45rem;
+            font-size: 0.72rem;
+            line-height: 21px;
+            color: #333;
+          }
+
+          .desc {
+            margin-bottom: 8px;
+            font-size: 0.45rem;
+            line-height: 0.86rem;
+            color: #bfbfbf;
+            // 超出部分显示省略号
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
+          .extra {
+            margin-bottom: 0.58rem;
+            font-size: 0.45rem;
+            color: #bfbfbf;
+
+            .saled {
+              margin-right: 0.63rem;
+            }
+          }
+
+          .price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0;
+
+            .text {
+              font-size: 0.63rem;
+              color: #fb4e44;
+            }
+
+            .unit {
+              font-size: 0.545rem;
+              color: #bfbfbf;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.priceRight {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  background-color: #fff;
+
+  .priceRightReduce,
+  .priceRightAdd {
+    position: relative;
+    width: 5.33333333vw;
+    height: 5.33333333vw;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 5.33333333vw 5.33333333vw;
+  }
+
+  .priceRightReduce {
+    background-image: url('https://p0.meituan.net/openhfiveimages/86a6957f27823b06a23c26be8aea5579725.png');
+  }
+
+  .priceRightAdd {
+    background-image: url('https://p0.meituan.net/openhfiveimages/9daf1aae3cc53f1597c659262cc49545610.png');
+  }
+
+  // 放大点击热区
+  .reduceBox,
+  .addBox {
+    position: absolute;
+    inset: -3.33333333vw;
+  }
+
+  .priceRightNum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 8vw;
+    font-size: 3.73333333vw;
+    color: #222426;
+    letter-spacing: 0.05333333vw;
+  }
+}
+
+.menuItemIcon {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  background-color: #fb4e44;
+  text-align: center;
+  border-radius: 50%;
+  transform: scale(0.5) translate(50%, -50%);
+
+  &.menuItemIconv2 {
+    width: 36px;
+    border-radius: 0.545rem;
+  }
+}
