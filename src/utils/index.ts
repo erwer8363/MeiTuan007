@@ -28,16 +28,18 @@ export const debounce = (func, delay) => {
 // 背景颜色的变化随时间变化
 export const backGroundColor = (str) => {
   let box = document.querySelector(str)
+  // TODO(阶段 6)：CitySelect 已改 CSS Modules，.next 不存在，临时判空；改为 state 驱动后删除
+  let next = document.querySelector('.next')
   let timeout = new Date().getHours()
   if (timeout >= 18) {
-    box.classList.add('bgColor')
-    document.querySelector('.next').classList.remove('icon_city-next')
-    document.querySelector('.next').classList.add('fa-arrow-right')
-    document.querySelector('.next').classList.add('fa')
+    box?.classList.add('bgColor')
+    next?.classList.remove('icon_city-next')
+    next?.classList.add('fa-arrow-right')
+    next?.classList.add('fa')
   } else {
-    box.classList.remove('bgColor')
-    document.querySelector('.next').classList.remove('fa-arrow-right')
-    document.querySelector('.next').classList.add('icon_city-next')
+    box?.classList.remove('bgColor')
+    next?.classList.remove('fa-arrow-right')
+    next?.classList.add('icon_city-next')
   }
 }
 
