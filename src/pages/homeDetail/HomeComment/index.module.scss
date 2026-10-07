@@ -1,0 +1,112 @@
+.enterLoading {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.wrapper {
+  .rating {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.454rem;
+    padding: 0.686rem 0;
+    background-color: #fff;
+  }
+
+  .ratingLeft,
+  .ratingMd,
+  .ratingFooter {
+    flex: 0 0 auto;
+    width: 2.2rem;
+    height: 2.27rem;
+    padding: 0 6%;
+  }
+
+  .ratingLeftHd,
+  .ratingFooterScore {
+    height: 1.36rem;
+    margin-bottom: 0.045rem;
+    font-size: 1.227rem;
+    line-height: 1.36rem;
+    color: #999;
+    text-align: center;
+    font-family: 'PingFangSC-Medium', 'Hiragino Sans GB', Arial, Helvetica, '宋体', sans-serif;
+  }
+
+  .ratingLeftHd {
+    color: #ffb000;
+  }
+
+  .ratingLeftBd,
+  .ratingFooterDesc {
+    font-size: 0.545rem;
+    color: #999;
+    text-align: center;
+  }
+
+  .ratingMd {
+    // 中间评分栏占满剩余宽度
+    &:nth-child(2) {
+      flex: 1 1 auto;
+      padding-left: 0;
+      position: relative;
+    }
+  }
+
+  .ratingMdMain {
+    white-space: nowrap;
+    min-height: 0.727rem;
+
+    &:first-child {
+      margin: 0.136rem 0 0.41rem;
+    }
+  }
+
+  .ratingMdMainDesc,
+  .ratingMdMainFoot,
+  .ratingMdMainScore {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .ratingMdMainDesc {
+    margin-right: 0.686rem;
+    font-size: 0.6rem;
+    line-height: 0.772rem;
+    color: #666;
+  }
+
+  .ratingMdMainFoot {
+    margin-right: 0.454rem;
+  }
+
+  .ratingMdMainPic {
+    display: inline-block;
+    height: 0.545rem;
+
+    img {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+
+  .ratingMdMainScore {
+    font-size: 0.636rem;
+    color: #ffb000;
+  }
+
+  .item {
+    display: inline-block;
+    height: 1.227rem;
+    padding: 0 1rem;
+    margin-right: 0.27rem;
+    margin-bottom: 0.27rem;
+    font-size: 0.545rem;
+    line-height: 1.227rem;
+    background: #f4f4f4;
+    border-radius: 0.136rem;
+    color: #999;
+  }
+}

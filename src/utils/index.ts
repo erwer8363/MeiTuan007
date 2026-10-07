@@ -73,7 +73,7 @@ export const lazyload = (str) => {
           deleteIndexLists.push(index)
           count++
           if (count == length) {
-            document.removeEventListener('click', imgLazyLoad)
+            window.removeEventListener('scroll', imgLazyLoad)
           }
         }
       })
@@ -82,6 +82,10 @@ export const lazyload = (str) => {
   })()
 
   window.addEventListener('scroll', imgLazyLoad)
+  // 首屏内的图片不需要滚动就应加载
+  imgLazyLoad()
+  // 返回清理函数，供 useEffect 卸载时移除监听
+  return () => window.removeEventListener('scroll', imgLazyLoad)
 }
 
 // 函数节流的实现;

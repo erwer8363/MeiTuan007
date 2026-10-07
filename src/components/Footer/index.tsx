@@ -1,35 +1,34 @@
 import { memo } from 'react'
 import { Link, useLocation } from 'react-router'
-import { FooterWrapper } from './style'
+import styles from './index.module.scss'
 import classnames from 'classnames'
 import { isPathPartlyExisted } from '@/utils'
 
-function Footer(props) {
+const Footer = () => {
   const { pathname } = useLocation()
 
   if (isPathPartlyExisted(pathname)) {
-    return
+    return null
   }
   return (
-    <FooterWrapper>
+    <div className={styles.footerWrapper}>
       {/* Link的本质是a标签 */}
-      <Link to="/home" className={classnames({ active: pathname == '/home' || pathname == '/' })}>
-        <div className="icon_home"></div>
-        <div className="footer_home">首页</div>
+      <Link
+        to="/home"
+        className={classnames({ [styles.active]: pathname == '/home' || pathname == '/' })}
+      >
+        <div className={styles.iconHome}></div>
+        <div className={styles.footerHome}>首页</div>
       </Link>
-      {/* <Link to="/member" className={classnames({ active: pathname == '/member' })}>
-        <div className="icon_member"></div>
-        <div className='footer_member'>会员</div>
-      </Link> */}
-      <Link to="/order" className={classnames({ active: pathname == '/order' })}>
-        <div className="icon_order"></div>
-        <div className="footer_order">订单</div>
+      <Link to="/order" className={classnames({ [styles.active]: pathname == '/order' })}>
+        <div className={styles.iconOrder}></div>
+        <div className={styles.footerOrder}>订单</div>
       </Link>
-      <Link to="/mine" className={classnames({ active: pathname == '/mine' })}>
-        <div className="icon_mine"></div>
-        <div className="footer_mine">我的</div>
+      <Link to="/mine" className={classnames({ [styles.active]: pathname == '/mine' })}>
+        <div className={styles.iconMine}></div>
+        <div className={styles.footerMine}>我的</div>
       </Link>
-    </FooterWrapper>
+    </div>
   )
 }
 export default memo(Footer)

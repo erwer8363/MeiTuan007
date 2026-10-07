@@ -1,133 +1,96 @@
-import { useEffect, useState, memo } from 'react'
-import { Wrapper, EnterLoading } from './style'
-import { connect } from 'react-redux'
-import { Tabs, Badge } from 'antd-mobile'
+import { FC, memo, useEffect } from 'react'
+import styles from './index.module.scss'
+import { Badge, Button, ErrorBlock, Tabs } from 'antd-mobile'
 import starImg from '@/assets/images/star.png'
 import Loading from '@/components/common/loading'
-import { getCommentsList, getNavList } from './store/actionCreators'
-// 图片延迟加载
-import loadingPic from '@/assets/images/loading.gif'
 import { lazyload } from '@/utils'
+import type { RatingComment } from '@/types'
+import CommentItem from './CommentItem'
+import { useAtomValue, useSetAtom } from 'jotai'
+import {
+  commentsAtom,
+  commentsErrorAtom,
+  loadCommentsAndNavsAtom,
+  loadingAtom,
+  navsAtom,
+} from '@/atoms/homeDetailStore'
 
-function HomeComment(props) {
-  const { comments, navList, loading } = props
-  const { getCommentsListDispatch, getNavListDispatch } = props
+const HomeComment: FC = () => {
+  const navList = useAtomValue(navsAtom)
+  const comments = useAtomValue(commentsAtom)
+  const loading = useAtomValue(loadingAtom)
+  const error = useAtomValue(commentsErrorAtom)
+  const getCommentsAndNavList = useSetAtom(loadCommentsAndNavsAtom)
   useEffect(() => {
-    getCommentsListDispatch()
-    getNavListDispatch()
-    lazyload('.content img')
-  }, [])
+    getCommentsAndNavList()
+  }, [getCommentsAndNavList])
 
-  const navlist = () => {
+  // 评论渲染后再收集图片，卸载时移除 scroll 监听
+  useEffect(() => {
+    if (!comments.length) return
+    return lazyload(`.${styles.wrapper} img[data-src]`)
+  }, [comments])
+
+  const navListView = () => {
     return navList.map((item) => {
       return (
-        <span className="item" key={item.label_id}>
+        <span className={styles.item} key={item.label_id}>
           {item.content}
         </span>
       )
     })
   }
-  const contentlist = () => {
-    return comments.map((item) => {
-      return (
-        <li className="comment-item" key={item.wm_comment_id}>
-          <div className="comment-header">
-            <img src={item.user_pic_url ? item.user_pic_url : starImg} />
-          </div>
-          <div className="comment-main">
-            <div className="user">{item.user_name}</div>
-            <div className="time">{new Date().toLocaleDateString()}</div>
-            <div className="star-wrapper">
-              <span className="text">评分</span>
-              <div className="star star">
-                <span className="star-item on"></span>
-                <span className="star-item on"></span>
-                <span className="star-item on"></span>
-                <span className="star-item on"></span>
-                <span className="star-item on"></span>
-              </div>
-            </div>
-
-            <div className="content">
-              <span>{item.comment}</span>
-              {item.user_pic_url && <img data-src={item.user_pic_url} src={loadingPic} />}
-            </div>
-          </div>
-        </li>
-      )
-    })
+  const picComments = comments.filter((item) => item.user_pic_url)
+  const commentListView = (list: RatingComment[]) => {
+    return list.map((item) => <CommentItem key={item.wm_comment_id} comment={item} />)
   }
   return (
-    <Wrapper>
-      <div className="rating">
-        <div className="rating-left">
-          <div className="rating-left-hd">4.5</div>
-          <div className="rating-left-bd">商家评分</div>
+    <div className={styles.wrapper}>
+      <div className={styles.rating}>
+        <div className={styles.ratingLeft}>
+          <div className={styles.ratingLeftHd}>4.5</div>
+          <div className={styles.ratingLeftBd}>商家评分</div>
         </div>
-        <div className="rating-md">
-          <div className="rating-md-main">
-            <div className="rating-md-main-desc">口味</div>
-            <div className="rating-md-main-foot">
-              <div className="rating-md-main-pic">
+        <div className={styles.ratingMd}>
+          <div className={styles.ratingMdMain}>
+            <div className={styles.ratingMdMainDesc}>口味</div>
+            <div className={styles.ratingMdMainFoot}>
+              <div className={styles.ratingMdMainPic}>
                 <img src={starImg} alt="" />
               </div>
             </div>
-            <div className="rating-md-main-score">4.6</div>
+            <div className={styles.ratingMdMainScore}>4.6</div>
           </div>
-          <div className="rating-md-main">
-            <div className="rating-md-main-desc">包装</div>
-            <div className="rating-md-main-foot">
-              <div className="rating-md-main-pic">
+          <div className={styles.ratingMdMain}>
+            <div className={styles.ratingMdMainDesc}>包装</div>
+            <div className={styles.ratingMdMainFoot}>
+              <div className={styles.ratingMdMainPic}>
                 <img src={starImg} alt="" />
               </div>
             </div>
-            <div className="rating-md-main-score">4.7</div>
+            <div className={styles.ratingMdMainScore}>4.7</div>
           </div>
         </div>
-        <div className="rating-footer">
-          <div className="rating-footer-score  ">4.9</div>
-          <div className="rating-footer-desc">配送评分</div>
+        <div className={styles.ratingFooter}>
+          <div className={styles.ratingFooterScore}>4.9</div>
+          <div className={styles.ratingFooterDesc}>配送评分</div>
         </div>
       </div>
+      {error && !loading ? (
+        <ErrorBlock status="default" title="评论加载失败" description={error.message}>
+          <Button size="small" color="primary" onClick={() => getCommentsAndNavList()}>
+            重试
+          </Button>
+        </ErrorBlock>
+      ) : null}
       <Tabs>
         <Tabs.Tab title="全部" key="all">
-          <div className="labels-view">{navlist()}</div>
-          <ul className="rating-list">{contentlist()}</ul>
+          <div>{navListView()}</div>
+          <ul>{commentListView(comments)}</ul>
         </Tabs.Tab>
-        <Tabs.Tab title="有图" key="pic">
-          <div className="labels-view">{navlist()}</div>
-          <ul className="rating-list">
-            {comments.map((item) => {
-              return (
-                item.user_pic_url && (
-                  <li className="comment-item" key={item.wm_comment_id}>
-                    <div className="comment-header">
-                      <img src={item.user_pic_url ? item.user_pic_url : starImg} />
-                    </div>
-                    <div className="comment-main">
-                      <div className="user">{item.user_name}</div>
-                      <div className="time">{new Date().toLocaleDateString()}</div>
-                      <div className="star-wrapper">
-                        <span className="text">评分</span>
-                        <div className="star star">
-                          <span className="star-item on"></span>
-                          <span className="star-item on"></span>
-                          <span className="star-item on"></span>
-                          <span className="star-item on"></span>
-                          <span className="star-item on"></span>
-                        </div>
-                      </div>
-
-                      <div className="content">
-                        <span>{item.comment}</span>
-                        <img data-src={item.user_pic_url} src={loadingPic} />
-                      </div>
-                    </div>
-                  </li>
-                )
-              )
-            })}
-          </ul>
+        <Tabs.Tab title="有图" key="pic" forceRender>
+          <div>{navListView()}</div>
+          <ul>{commentListView(picComments)}</ul>
         </Tabs.Tab>
         <Tabs.Tab
           title={
@@ -137,32 +100,15 @@ function HomeComment(props) {
           }
           key="animals"
         >
-          <div className="labels-view">{navlist()}</div>
+          <div>{navListView()}</div>
         </Tabs.Tab>
       </Tabs>
       {loading ? (
-        <EnterLoading>
-          <Loading></Loading>
-        </EnterLoading>
+        <div className={styles.enterLoading}>
+          <Loading />
+        </div>
       ) : null}
-    </Wrapper>
+    </div>
   )
 }
-const mapStateToProps = (state) => {
-  return {
-    comments: state.comment.CommentsList,
-    navList: state.comment.NavList,
-    loading: state.comment.Loading,
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCommentsListDispatch() {
-      dispatch(getCommentsList())
-    },
-    getNavListDispatch() {
-      dispatch(getNavList())
-    },
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(memo(HomeComment))
+export default memo(HomeComment)
